@@ -1,0 +1,230 @@
+/* CSS sidebar cho trang web của quản trị viên/hủ thư */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* sidebar admin */
+.admin-sidebar{
+    position: fixed;
+    left: 0;
+    width: 205px;
+    height: 100vh;
+    background: #fff;
+    border-right: 1px solid #ececec;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 16px;
+}
+
+.admin-sidebar-top{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.admin-sidebar-logo{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ececec;
+}
+
+.admin-sidebar-logo img{
+    width: 130px;
+    height: auto;
+    display: block;
+}
+
+.admin-user-info {
+    text-align: center;
+    padding: 10px 0 22.5px;
+    border-bottom: 1px solid #ececec;
+    margin-bottom: 8px;
+}
+
+.admin-user-name {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+}
+
+.admin-user-role{
+    display: inline-block;
+    margin-top: 8px;
+    padding: 5px 12px;
+    border-radius: 999px;
+    background: #eef4ff;
+    color: #2f6fed;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.admin-sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.admin-sidebar-menu li {
+    margin-bottom: 8px;
+}
+
+.admin-sidebar-menu a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.admin-sidebar-menu a:hover {
+    background: #f5f7ff;
+}
+
+.admin-sidebar-menu i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+}
+
+.admin-sidebar-footer{
+    display: flex; 
+    flex-direction: column;
+    gap: 16px;
+}
+
+.admin-sidebar-bottom a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #dc2626;
+    background: #fff1f2;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.admin-sidebar-bottom a:hover {
+    background: #ffe4e6;
+}
+
+.admin-sidebar-bottom i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    color: #dc2626;
+}
+
+.admin-sidebar-version {
+    text-align: center;
+    font-size: 12px;
+    color: #999;
+}
+
+/* Active */
+.admin-sidebar-menu a.active {
+    background: #eef4ff;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.admin-sidebar-menu a.active i {
+    color: #2563eb;
+}
+
+/* popup xác nhận đăng xuất */
+.logout-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .25s ease;
+    z-index: 9999;
+}
+
+.logout-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logout-modal-content {
+    width: 380px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    transform: scale(.9);
+    transition: .25s;
+}
+
+.logout-modal.show .logout-modal-content {
+    transform: scale(1);
+}
+
+.logout-modal-icon {
+    font-size: 48px;
+    color: #dc3545;
+    margin-bottom: 15px;
+}
+
+.logout-modal-content h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #222;
+}
+
+.logout-modal-content p {
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.logout-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logout-modal-actions button,
+.logout-modal-actions a {
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .2s;
+}
+
+#logout-cancel {
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+#logout-cancel:hover {
+    background: #f4f4f4;
+}
+
+#logout-confirm {
+    background: #dc3545;
+    color: white;
+}
+
+#logout-confirm:hover {
+    background: #bb2d3b;
+}

@@ -1,0 +1,195 @@
+/* CSS đăng ký cho độc giả */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f5f8ff;
+}
+
+.register-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 22.5px 0;
+}
+
+.register-card {
+    width: 720px;
+    background: #fff;
+    border-radius: 16px;
+    padding: 32.5px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+}
+
+.register-logo {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.register-logo img {
+    width: 170px;
+}
+
+.register-card h2 {
+    text-align: center;
+    font-size: 28px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.register-card p {
+    text-align: center;
+    color: #777;
+    margin-bottom: 35px;
+    font-size: 15px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 22px 20px;
+    margin-bottom: 16px;
+}
+
+.form-grid .form-group {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    border:1px solid  #dcdcdc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.input-box i {
+    width: 45px;
+    text-align: center;
+    color: #777;
+    font-size: 18px;
+}
+
+.input-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 15px 14px 0;
+    font-size: 15px;
+}
+
+.input-box:focus-within {
+    border-color: #2f6fed;
+}
+
+.register-option {
+    text-align: right;
+}
+
+.register-option a {
+    color: #2f6fed;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.register-option a:hover {
+    text-decoration: underline;
+}
+
+.toggle-password {
+    padding: 0 15px;
+    font-size: 18px;
+    color: #888;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.toggle-password:hover {
+    color: #2f6fed;
+}
+
+.register-btn {
+    width: 100%;
+    border: none;
+    background: #2f6fed;
+    color: #fff;
+    padding: 15px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.register-btn:hover {
+    background: #2559c7;
+}
+
+/* Tạo tài khoản */
+.register-option {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 14px;
+    color: #777;
+}
+
+.register-option a {
+    margin-left: 4px;
+    color: #2f6fed;
+    text-decoration: none;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.register-option a:hover {
+    text-decoration: underline;
+}
+
+.required-note {
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+}
+
+.required-note span {
+    color: #dc2626;
+    font-weight: bold;
+}
+
+.required {
+    color: #dc2626;
+    margin-left: 3px;
+}
+
+.input-box select {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 15px 14px 0;
+    font-size: 15px;
+    background: #fff;
+    cursor: pointer;
+}
+
+input[type="date"] {
+    color: #555;
+}

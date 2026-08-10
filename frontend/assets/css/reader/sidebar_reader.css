@@ -1,0 +1,187 @@
+/* CSS sidebar cho trang web của reader */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.reader-sidebar{
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 205px;
+    height: calc(100vh - 70px);
+    background: #fff;
+    border-right: 1px solid #ececec;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px 16px;
+}
+
+.reader-sidebar-menu{
+    list-style: none;
+}
+
+.reader-sidebar-menu li{
+    margin-bottom: 8px;
+}
+
+.reader-sidebar-menu a{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #444;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.reader-sidebar-menu a:hover{
+    background: #f5f7ff;
+}
+
+.reader-sidebar-menu i{
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+}
+
+.reader-sidebar-bottom a{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #dc2626;
+    background: #fff1f2;
+    font-size: 15px;
+    transition: .25s;
+}
+
+.reader-sidebar-bottom a:hover{
+    background: #ffe4e6;
+}
+
+.reader-sidebar-bottom i{
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+    color: #dc2626;
+}
+
+.badge{
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ff3b30;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Active */
+.reader-sidebar-menu a.active {
+    background: #eef4ff;
+    color: #2563eb;
+    font-weight: bold;
+}
+
+.reader-sidebar-menu a.active i {
+    color: #2563eb;
+}
+
+/* popup xác nhận đăng xuất */
+.logout-modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .25s ease;
+    z-index: 9999;
+}
+
+.logout-modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.logout-modal-content {
+    width: 380px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+    transform: scale(.9);
+    transition: .25s;
+}
+
+.logout-modal.show .logout-modal-content {
+    transform: scale(1);
+}
+
+.logout-modal-icon {
+    font-size: 48px;
+    color: #dc3545;
+    margin-bottom: 15px;
+}
+
+.logout-modal-content h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    color: #222;
+}
+
+.logout-modal-content p {
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.logout-modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+.logout-modal-actions button,
+.logout-modal-actions a {
+    padding: 10px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+    transition: .2s;
+}
+
+#logout-cancel {
+    border: 1px solid #ddd;
+    background: #fff;
+}
+
+#logout-cancel:hover {
+    background: #f4f4f4;
+}
+
+#logout-confirm {
+    background: #dc3545;
+    color: white;
+}
+
+#logout-confirm:hover {
+    background: #bb2d3b;
+}

@@ -1,0 +1,147 @@
+/* CSS trang hiển thị và chỉnh sửa thông tin cho quản trị viên/thủ thư */
+body {
+    overflow-x: hidden;
+}
+
+.profile-container {
+    margin-left: 205px;
+    width: calc(100% - 205px);
+    min-height: 100vh;
+    padding: 40px;
+    background: #f5f7fb;
+}
+
+.profile-header {
+    margin-bottom: 25px;
+}
+
+.profile-header h2 {
+    font-size: 30px;
+    color: #1f2937;
+    margin-bottom: 8px;
+}
+
+.profile-card {
+    width: 100%;
+    background: #fff;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+}
+
+.profile-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 24px;
+    border-bottom: 1px solid #eef2f7;
+}
+
+.profile-row:last-child {
+    border-bottom: none;
+}
+
+.profile-row span {
+    width: 220px;
+    flex-shrink: 0;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.profile-row strong {
+    flex: 1;
+    color: #111827;
+    font-weight: 600;
+    text-align: right;
+    word-break: break-word;
+}
+
+.profile-row:hover {
+    background: #f8fafc;
+}
+
+@media (max-width: 992px) {
+
+    .profile-container {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .profile-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .profile-row span,
+    .profile-row strong {
+        width: 100%;
+        text-align: left;
+    }
+}
+
+.profile-edit-form {
+    display: none;
+}
+
+.profile-edit-form input,
+.profile-edit-form select {
+    width: 320px;
+    padding: 10px 12px;
+    border:1px solid  #d1d5db;
+    border-radius: 8px;
+    font-size: 15px;
+    text-align: left;
+}
+
+.profile-edit-form input:focus{
+    outline: none;
+    border-color: #2563eb;
+}
+
+.profile-edit-form input[readonly],
+.profile-edit-form input:disabled,
+.profile-edit-form select:disabled{
+    background: #f3f4f6;
+    cursor: not-allowed;
+}
+
+.profile-actions{
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 15px;
+}
+
+.btn-primary,
+.btn-secondary{
+    padding: 10px 22px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 15px;
+    text-decoration: none;
+}
+
+.btn-primary{
+    background: #2563eb;
+    color: #fff;
+}
+
+.btn-primary:hover{
+    background: #1d4ed8;
+}
+
+.btn-secondary{
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.btn-secondary:hover{
+    background: #d1d5db;
+}

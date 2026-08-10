@@ -1,0 +1,71 @@
+/* CSS hiển thị thông báo popup */
+/* CSS hiển thị thông báo thành công */
+.alert-success {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: #ecfdf5;
+    color: #15803d;
+    border-left: 4px solid #22c55e;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    z-index: 9999;
+
+    /* trạng thái ban đầu */
+    transform: translateX(120%);
+    animation: pushIn 0.5s ease forwards;
+}
+
+.alert-success i {
+    font-size: 20px;
+}
+
+/* CSS hiển thị thông báo cảnh báo */
+.alert-warning {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 18px;
+    background: #fef2f2;
+    color: #b91c1c;
+    border-left: 4px solid #ef4444;
+    border-radius: 8px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, .15);
+    z-index: 9999;
+
+    /* trạng thái ban đầu */
+    transform: translateX(120%);
+    animation: pushIn 0.5s ease forwards;
+}
+
+.alert-warning i {
+    font-size: 20px;
+}
+
+@keyframes pushIn {
+    from {
+        transform: translateX(120%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Hiển thị thông báo lỗi */
+.alert-error{
+    background: #fee2e2;
+    color: #dc2626;
+    border: 1px solid #fecaca;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
