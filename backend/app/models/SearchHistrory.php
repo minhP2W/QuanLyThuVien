@@ -1,1 +1,0 @@
-<!-- Bảng lịch sử tìm kiếm -->

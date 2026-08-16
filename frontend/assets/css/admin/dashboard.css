@@ -1,0 +1,687 @@
+/* CSS Trang quản trị cho quản trị viên/thủ thư */
+body {
+    overflow-x: hidden;
+}
+
+.admin-dashboard {
+    width: calc(100% - 205px);
+    margin-left: 205px;
+    padding: 22px 22px 35px;
+    box-sizing: border-box;
+    background: #f8f9fc;
+    min-height: calc(100vh - 60px);
+}
+
+/* Header */
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    color: #222;
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.dashboard-header p {
+    margin: 2px 0 0;
+    color: #777;
+    font-size: 15px;
+}
+
+.dashboard-date {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 7px;
+    color: #777;
+    font-size: 15px;
+}
+
+/* Stat cards */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.stat-card {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+    padding: 15px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9px;
+}
+
+.stat-icon i {
+    font-size: 19px;
+}
+
+/* Màu icon */
+.stat-icon.blue {
+    background: #eaf1ff;
+    color: #3975db;
+}
+
+.stat-icon.green {
+    background: #e9f8f1;
+    color: #20a486;
+}
+
+.stat-icon.purple {
+    background: #f0ebff;
+    color: #7656d6;
+}
+
+.stat-icon.orange {
+    background: #fff4df;
+    color: #e59a17;
+}
+
+.stat-icon.red {
+    background: #ffebed;
+    color: #dc5966;
+}
+
+.stat-icon.yellow {
+    background: #fff7d9;
+    color: #c99600;
+}
+
+.stat-info {
+    min-width: 0;
+}
+
+.stat-info span {
+    display: block;
+    margin-bottom: 2px;
+    color: #777;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.stat-info strong {
+    display: block;
+    color: #222;
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Grid */
+.dashboard-main-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.dashboard-content-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+/* Card */
+.dashboard-card {
+    min-width: 0;
+    padding: 17px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+}
+
+.card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.card-header h2 {
+    margin: 0;
+    color: #222;
+    font-size: 17.5px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.card-header p {
+    margin: 2px 0 0;
+    color: #777;
+    font-size: 13px;
+}
+
+.card-header a {
+    color: #3975db;
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.card-header a:hover {
+    text-decoration: underline;
+}
+
+.year-filter-form {
+    margin: 0;
+}
+
+.year-filter {
+    min-width: 90px;
+    padding: 9px 30px 9px 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: #fff;
+    color: #777;
+    font-size: 15px;
+    cursor: pointer;
+    outline: none;
+}
+
+.year-filter:focus {
+    border-color: #3b82f6;
+}
+
+/* Biểu đồ (chart) */
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    height: 270px;
+}
+
+/* Task */
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    padding: 9px;
+    border: 1px solid #edf0f3;
+    border-radius: 8px;
+    color: #333;
+    text-decoration: none;
+    transition:
+        background 0.25s ease,
+        border-color 0.25s ease;
+}
+
+.task-item:hover {
+    background: #f8faff;
+    border-color: #dce7fa;
+}
+
+.task-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 7px;
+}
+
+.task-icon i {
+    font-size: 15px;
+}
+
+.task-icon.danger {
+    background: #ffebed;
+    color: #dc5966;
+}
+
+.task-icon.warning {
+    background: #fff4df;
+    color: #e59a17;
+}
+
+.task-icon.blue {
+    background: #eaf1ff;
+    color: #3975db;
+}
+
+.task-icon.orange {
+    background: #fff0e5;
+    color: #e47d24;
+}
+
+.task-icon.red {
+    background: #ffebed;
+    color: #dc5966;
+}
+
+.task-content {
+    min-width: 0;
+    flex: 1;
+}
+
+.task-content strong {
+    margin-right: 3px;
+    color: #222;
+    font-size: 15px;
+}
+
+.task-content span {
+    color: #777;
+    font-size: 13px;
+}
+
+.task-arrow {
+    color: #aaa;
+    font-size: 13px;
+}
+
+/* Popular book */
+.popular-book-list {
+    display: flex;
+    flex-direction: column;
+}
+
+.popular-book-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 1px solid #f0f1f3;
+}
+
+.popular-book-item:last-child {
+    border-bottom: none;
+}
+
+.book-rank {
+    width: 27px;
+    height: 27px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #edf3ff;
+    color: #3975db;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.popular-book-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.popular-book-info strong {
+    display: block;
+    overflow: hidden;
+    color: #333;
+    font-size: 13px;
+    line-height: 1.5;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.popular-book-info span {
+    display: block;
+    overflow: hidden;
+    color: #777;
+    font-size: 12px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.borrow-count {
+    flex-shrink: 0;
+    text-align: right;
+}
+
+.borrow-count strong {
+    display: block;
+    color: #3975db;
+    font-size: 13px;
+}
+
+.borrow-count span {
+    color: #777;
+    font-size: 12px;
+}
+
+/* Stock */
+.stock-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+}
+
+.stock-total {
+    padding-bottom: 13px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.stock-total strong {
+    display: block;
+    color: #222;
+    font-size: 30px;
+    line-height: 1.5;
+}
+
+.stock-total span {
+    color: #777;
+    font-size: 13px;
+}
+
+.stock-progress {
+    position: relative;
+}
+
+.progress-label {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    color: #777;
+    font-size: 13px;
+}
+
+.progress-label strong {
+    color: #222;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 7px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #edf0f3;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.progress-fill.available {
+    background: #3975db;
+}
+
+.progress-fill.borrowed {
+    background: #e59a17;
+}
+
+.stock-progress small {
+    display: block;
+    margin-top: 4px;
+    color: #777;
+    font-size: 12px;
+    text-align: right;
+}
+
+/* Recent table */
+.recent-card {
+    margin-bottom: 12px;
+}
+
+.table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.dashboard-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.dashboard-table th {
+    padding: 10px 8px;
+    border-bottom: 1px solid #e8eaed;
+    color: #777;
+    font-size: 13px;
+    font-weight: bold;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.dashboard-table td {
+    padding: 11px 8px;
+    border-bottom: 1px solid #f0f1f3;
+    color: #222;
+    font-size: 13px;
+    vertical-align: middle;
+}
+
+.dashboard-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.dashboard-table tbody tr:hover {
+    background: #fafbfc;
+}
+
+.reader-cell {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    min-width: 130px;
+}
+
+.reader-avatar {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #eaf1ff;
+    color: #3975db;
+    font-size: 12.5px;
+    font-weight: 700;
+}
+
+.reader-cell strong {
+    display: block;
+    color: #222;
+    font-size: 13px;
+}
+
+.reader-cell span {
+    display: block;
+    margin-top: 1px;
+    color: #777;
+    font-size: 12px;
+}
+
+.book-name {
+    display: block;
+    max-width: 220px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+/* Trạng thái (status) */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    white-space: nowrap;
+}
+
+.status-badge.returned {
+    background: #e9f8f1;
+    color: #20a486;
+}
+
+.status-badge.borrowing {
+    background: #eaf1ff;
+    color: #3975db;
+}
+
+.status-badge.overdue {
+    background: #ffebed;
+    color: #dc5966;
+}
+
+/* Đánh giá (review) */
+.review-summary {
+    display: flex;
+    gap: 25px;
+}
+
+.rating-number {
+    min-width: 105px;
+    text-align: center;
+}
+
+.rating-number strong {
+    display: block;
+    color: #222;
+    font-size: 30px;
+    line-height: 1.5;
+}
+
+.rating-stars {
+    margin: 4px 0;
+    color: #f2b01e;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+.rating-number span {
+    color: #777;
+    font-size: 12px;
+}
+
+.rating-bars {
+    flex: 1;
+}
+
+.rating-row {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-bottom: 6px;
+}
+
+.rating-row > span {
+    width: 28px;
+    color: #777;
+    font-size: 12px;
+}
+
+.rating-progress {
+    flex: 1;
+    height: 6px;
+    overflow: hidden;
+    border-radius: 10px;
+    background: #edf0f3;
+}
+
+.rating-progress div {
+    height: 100%;
+    border-radius: 10px;
+    background: #f2b01e;
+}
+
+.rating-row small {
+    width: 20px;
+    color: #777;
+    font-size: 12px;
+    text-align: right;
+}
+
+/* Tiền phạt (fine) */
+.fine-summary {
+    display: flex;
+    flex-direction: column;
+}
+
+.fine-total {
+    padding-bottom: 12px;
+    margin-bottom: 4px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.fine-total span {
+    display: block;
+    margin-bottom: 3px;
+    color: #777;
+    font-size: 13px;
+}
+
+.fine-total strong {
+    color: #222;
+    font-size: 30px;
+}
+
+.fine-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f1f2f4;
+    color: #777;
+    font-size: 13px;
+}
+
+.fine-row:last-child {
+    border-bottom: none;
+}
+
+.fine-row div {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.fine-row i {
+    color: #3975db;
+    font-size: 13px;
+}
+
+.fine-row strong {
+    color: #222;
+}
+
+/* Empty */
+.empty-data {
+    padding: 20px 0;
+    color: #777;
+    font-size: 13px;
+    text-align: center;
+}
+
+.empty-table {
+    padding: 25px !important;
+    color: #777 !important;
+    text-align: center !important;
+}

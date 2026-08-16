@@ -41,6 +41,7 @@ body {
     color: #444;
     font-size: 15px;
     transition: .25s;
+    white-space: nowrap;
 }
 
 .reader-sidebar-menu a:hover{
@@ -84,8 +85,8 @@ body {
     border-radius: 50%;
     background: #ff3b30;
     color: #fff;
-    font-size: 11px;
-    font-weight: 600;
+    font-size: 10px;
+    font-weight: bold;
     display: flex;
     align-items: center;
     justify-content: center;

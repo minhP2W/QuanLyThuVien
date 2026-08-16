@@ -14,13 +14,19 @@
             }
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-                $full_name  = trim($_POST['full_name']);
-                $gender     = trim($_POST['gender']);
-                $birth_date = !empty($_POST['birthday']) ? $_POST['birthday'] : null;
-                $email      = trim($_POST['email']);
-                $phone      = trim($_POST['phone']);
-                $address    = !empty($_POST['address']) ? trim($_POST['address']) : null;
-                $password   = password_hash($_POST['password'], PASSWORD_DEFAULT);
+                $full_name       = trim($_POST['full_name']);
+                $gender          = trim($_POST['gender']);
+                $birth_date      = !empty($_POST['birthday']) ? $_POST['birthday'] : null;
+                $email           = trim($_POST['email']);
+                $phone           = trim($_POST['phone']);
+                $address         = !empty($_POST['address']) ? trim($_POST['address']) : null;
+                $password        = $_POST['password'];
+                $confirmPassword = $_POST['confirm_password'];
+
+                // Kiểm tra sự trùng khớp của mật khẩu
+                if ($password !== $confirmPassword) {
+                    $error = "Mật khẩu xác nhận không khớp!";
+                }
 
                 // Kiểm tra email
                 if (Reader::findByEmail($email)) {
@@ -33,6 +39,9 @@
                 }
 
                 else {
+                    // Hash mật khẩu sau khi đã kiểm tra
+                    $password = password_hash($password, PASSWORD_DEFAULT);
+
                     // Sinh mã độc giả
                     $reader_code = Reader::generateReaderCode();
 
@@ -50,6 +59,8 @@
 
                     // Cho phép đăng ký khi thông tin đăng ký hợp lệ
                     if ($reader_id) {
+                        unset($_SESSION['admin']);
+
                         $_SESSION['reader'] = [
                             'reader_id'   => $reader_id,
                             'reader_code' => $reader_code,
@@ -86,6 +97,8 @@
 
                 // Cho phép đăng nhập khi thông tin đăng nhập đúng
                 if ($reader && $reader['status'] === 'active' && password_verify($password, $reader['password'])) {
+                    unset($_SESSION['admin']);
+
                     $_SESSION['reader'] = [
                         'reader_id'   => $reader['reader_id'],
                         'reader_code' => $reader['reader_code'],

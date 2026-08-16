@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/error.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/error.css?v=1.0">
 </head>
 <body>
     <div class="error-container">

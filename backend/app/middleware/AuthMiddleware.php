@@ -16,7 +16,7 @@
         public static function reader()
         {
             if (!isset($_SESSION['reader'])) {
-                $_SESSION['warning'] = "Vui lòng đăng nhập để sử dụng chức năng này.";
+                $_SESSION['warning'] = "Vui lòng đăng nhập trước khi sử dụng chức năng này.";
                 header("Location: " . BASE_URL . "/index.php?page=home");
                 exit;
             }

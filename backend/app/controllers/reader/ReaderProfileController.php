@@ -2,12 +2,18 @@
 <?php
     require_once __DIR__ . '/../../models/Reader.php';
 
-    class ReaderProfileController // extends BaseController
+    require_once __DIR__ . '/BaseReaderController.php';
+
+    class ReaderProfileController extends BaseReaderController
     {
         // Hiển thị và cập nhật thông tin cá nhân độc giả
         public static function profile()
-        {
+        {   
             $reader_id = $_SESSION['reader']['reader_id'];
+            $navbarData = self::getNavbarData();
+            $notifications = $navbarData['notifications'];
+            $hasUnreadNotification = $navbarData['hasUnreadNotification'];
+            $unreadNotificationCount = $navbarData['unreadNotificationCount'];
             $reader = Reader::findById($reader_id);
 
             $currentReader = Reader::findById($_SESSION['reader']['reader_id']);
@@ -55,7 +61,12 @@
         // Thay đổi mật khẩu tài khoản độc giả
         public static function changePassword()
         {
-            $reader = Reader::findById($_SESSION['reader']['reader_id']);
+            $reader_id = $_SESSION['reader']['reader_id'];
+            $navbarData = self::getNavbarData();
+            $notifications = $navbarData['notifications'];
+            $hasUnreadNotification = $navbarData['hasUnreadNotification'];
+            $unreadNotificationCount = $navbarData['unreadNotificationCount'];
+            $reader = Reader::findById($reader_id);
 
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $oldPassword = trim($_POST['old_password']);
@@ -72,7 +83,7 @@
 
                 // Kiểm tra xác nhận mật khẩu
                 if ($newPassword !== $confirmPassword) {
-                    $error = "Mật khẩu mới và xác nhận mật khẩu không khớp.";
+                    $error = "Mật khẩu mới và xác nhận mật khẩu mới không khớp.";
 
                     require_once __DIR__ . '/../../../../frontend/reader/changePassword_reader.php';
                     return;

@@ -68,14 +68,33 @@ body {
     gap: 25px;
 }
 
+/* Hiển thị thông báo */
+.notification-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 10px;
+    height: 10px;
+    background: #ff3b30;
+    border: 2px solid #fff;
+    border-radius: 50%;
+}
+
+.reader-notification-wrapper {
+    position: relative;
+}
+
+/* Nút chuông */
 .reader-notification {
     position: relative;
-    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
     border: none;
     cursor: pointer;
     color: #555;
     font-size: 20px;
-    text-decoration: none;
     transition: .25s;
 }
 
@@ -83,6 +102,163 @@ body {
     color: #2f6fed;
 }
 
+/* Dropdown thông báo */
+.reader-notification-dropdown {
+    position: absolute;
+    top: calc(100% + 12px);
+    right: -10px;
+    width: 360px;
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, .12);
+    display: none;
+    z-index: 9999;
+    overflow: hidden;
+    animation: dropdownFade .2s ease;
+}
+
+/* Khi JS thêm class show */
+.reader-notification-dropdown.show {
+    display: block;
+}
+
+/* Header thông báo */
+.reader-notification-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid #ececec;
+}
+
+.reader-notification-header h4 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #222;
+}
+
+
+/* Danh sách thông báo */
+.reader-notification-list {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+/* Một thông báo */
+.notification-item {
+    display: flex;
+    gap: 12px;
+    padding: 14px 16px;
+    border-bottom: 1px solid #eee;
+    transition: background .2s;
+}
+
+/* Chưa đọc */
+.notification-item.unread {
+    background: #eef4ff;
+}
+
+/* Đã đọc */
+
+.notification-item.read {
+    background: #fff;
+}
+
+/* Hover */
+.notification-item:hover {
+    background: #f5f7fa;
+}
+
+/* Icon thông báo */
+.notification-icon {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f0f2f5;
+    color: #555;
+    font-size: 15px;
+}
+
+/* Nội dung thông báo */
+.notification-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-content h5 {
+    margin: 0 0 5px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #222;
+}
+
+.notification-content p {
+    margin: 0 0 6px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.notification-time {
+    font-size: 11px;
+    color: #999;
+}
+
+/* Không có thông báo */
+.notification-empty {
+    padding: 35px 20px;
+    text-align: center;
+    color: #999;
+}
+
+.notification-empty i {
+    font-size: 30px;
+}
+
+.notification-empty p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    font-size: 14px;
+}
+
+/* Nút xem tất cả thông báo */
+.notification-view-all {
+    padding: 12px 16px;
+    text-align: center;
+    border-top: 1px solid #ececec;
+}
+
+.notification-view-all a {
+    display: block;
+    text-decoration: none;
+    color: #2f6fed;
+    font-size: 14px;
+    font-weight: 600;
+    transition: .25s;
+}
+
+.notification-view-all a:hover {
+    color: #1f55c7;
+}
+
+/* Hiệu ứng thông báo */
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* Hiển thị thông tin độc giả */
 .reader-user {
     display: flex;
     align-items: center;
@@ -97,17 +273,6 @@ body {
 
 .reader-user:focus {
     outline: none;
-}
-
-.notification-dot {
-    position: absolute;
-    top: -2px;
-    right: -2px;
-    width: 10px;
-    height: 10px;
-    background: #ff3b30;
-    border: 2px solid #fff;
-    border-radius: 50%;
 }
 
 .reader-user:hover {

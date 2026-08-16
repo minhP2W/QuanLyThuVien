@@ -1,6 +1,6 @@
 <!-- Trang đăng nhập cho quản trị viên/thủ thư -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,8 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/admin/login_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/admin/login_admin.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
 </head>
 <body>
     <div class="login-container">
@@ -85,7 +85,7 @@
         </div>
     </div>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/login.js"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/login.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
 </body>
 </html>

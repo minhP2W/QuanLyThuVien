@@ -1,6 +1,6 @@
 <!-- Trang hiển thị và chỉnh sửa hồ sơ cá nhân cho quản trị viên/thủ thư -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,9 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/admin/sidebar_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/admin/profile_admin.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/admin/sidebar_admin.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/admin/profile_admin.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
 </head>
 <body>
     <?php require_once 'sidebar_admin.php';?>
@@ -48,7 +48,7 @@
             </div>
 
             <div class="profile-row">
-                <span>Username</span>
+                <span>Tên người dùng</span>
                 <strong><?= htmlspecialchars($user['username']) ?></strong>
             </div>
 
@@ -83,7 +83,7 @@
             </div>
 
             <div class="profile-row">
-                <span>Username</span>
+                <span>Tên người dùng</span>
                 <input
                     type="text"
                     value="<?= htmlspecialchars($user['username']) ?>"
@@ -110,8 +110,8 @@
         </form>
     </div>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/profile.js"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/profile.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
 </body>
 </html>

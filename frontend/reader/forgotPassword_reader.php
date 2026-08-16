@@ -1,6 +1,6 @@
 <!-- Trang lấy lại mật khẩu cho độc giả -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +10,9 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/login_reader.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/forgotPassword.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/login_reader.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/forgotPassword.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
 </head>
 <body>
     <div class="login-container">

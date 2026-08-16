@@ -20,6 +20,8 @@
                 
                 // Cho phép đăng nhập khi thông tin đăng nhập đúng
                 if ($user && password_verify($password, $user['password'])) {
+                    unset($_SESSION['reader']);
+
                     $_SESSION['admin'] = [
                         'user_id' => $user['user_id'],
                         'username' => $user['username'],

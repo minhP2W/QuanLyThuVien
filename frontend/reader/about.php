@@ -1,6 +1,6 @@
 <!-- Trang giới thiệu và nội quy cho độc giả -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,14 +10,14 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/about.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/navbar_reader.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer_reader.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/about.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/navbar.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer.css?v=1.0">
 </head>
 <body>
-    <?php require_once 'navbar_reader.php';?>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/navbar_reader.js"></script>
+    <?php require_once 'navbar.php';?>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/navbar.js"></script>
 
     <?php require_once 'sidebar_reader.php';?>
 
@@ -101,8 +101,9 @@
         </section>
     </main>
 
-    <?php require_once 'footer_reader.php';?>
+    <?php require_once 'footer.php';?>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/sidebar_reader.js?v=1.0"></script>
 </body>
 </html>

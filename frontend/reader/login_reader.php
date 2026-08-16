@@ -1,6 +1,6 @@
 <!-- Trang đăng nhập cho độc giả -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,8 +10,8 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/login_reader.css">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/login_reader.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
 </head>
 <body>
     <div class="login-container">
@@ -75,13 +75,13 @@
 
                 <div class="register-option">
                     <span>Chưa có tài khoản?</span>
-                    <a href="<?= BASE_URL ?>/index.php?page=register">Tạo tài khoản mới</a>
+                    <a href="<?= BASE_URL ?>/index.php?page=register">Đăng ký</a>
                 </div>
             </form>
         </div>
     </div>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/login.js"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/login.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!-- Bảng độc giả (người đọc) -->
- <?php
+<?php
     // kết nối database
     require_once __DIR__ . '/../config/database.php';
 
@@ -192,6 +192,20 @@
             $stmt->bind_param("si", $password, $reader_id);
 
             return $stmt->execute();
+        }
+
+        // Đếm tổng số độc giả đang hoạt động
+        public static function getTotalActiveReaders()
+        {
+            global $conn;
+
+            $sql = "SELECT COUNT(*) AS total_readers
+                    FROM readers
+                    WHERE status = 'active'";
+
+            $result = $conn->query($sql);
+
+            return $result ? $result->fetch_assoc()['total_readers'] : 0;
         }
     }
 ?>

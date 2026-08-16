@@ -1,6 +1,6 @@
 <!-- Trang đăng ký cho độc giả -->
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/register.css">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/register.css?v=1.0">
 </head>
 <body>
     <div class="register-container">
@@ -125,27 +125,49 @@
                             >
                         </div>
                     </div>
-                </div>
 
-                <!-- Mật khẩu -->
-                <div class="form-group">
-                    <label>
-                        Mật khẩu
-                        <span class="required">*</span>
-                    </label>
+                    <!-- Mật khẩu -->
+                    <div class="form-group">
+                        <label>
+                            Mật khẩu
+                            <span class="required">*</span>
+                        </label>
 
-                    <div class="input-box">
-                        <i class="bi bi-lock"></i>
+                        <div class="input-box">
+                            <i class="bi bi-lock"></i>
 
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            placeholder="Nhập mật khẩu"
-                            required
-                        >
+                            <input
+                                type="password"
+                                id="password"
+                                name="password"
+                                placeholder="Nhập mật khẩu"
+                                required
+                            >
 
-                        <i class="bi bi-eye-slash toggle-password" id="togglePassword"></i>
+                            <i class="bi bi-eye-slash toggle-password" id="togglePassword"></i>
+                        </div>
+                    </div>
+
+                    <!-- Xác nhận mật khẩu -->
+                    <div class="form-group">
+                        <label>
+                            Xác nhận mật khẩu
+                            <span class="required">*</span>
+                        </label>
+
+                        <div class="input-box">
+                            <i class="bi bi-lock"></i>
+
+                            <input
+                                type="password"
+                                id="confirmPassword"
+                                name="confirm_password"
+                                placeholder="Nhập xác nhận mật khẩu"
+                                required
+                            >
+
+                            <i class="bi bi-eye-slash toggle-password" id="toggleConfirmPassword"></i>
+                        </div>
                     </div>
                 </div>
 
@@ -156,7 +178,7 @@
                 <div class="register-option">
                     <span>Đã có tài khoản?</span>
                     <a href="<?= BASE_URL ?>/index.php?page=login_reader">
-                        Đăng nhập ngay
+                        Đăng nhập
                     </a>
                 </div>
 
@@ -165,6 +187,6 @@
         </div>
     </div>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/register.js"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/register.js?v=1.0"></script>
 </body>
 </html>

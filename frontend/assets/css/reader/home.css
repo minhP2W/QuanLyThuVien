@@ -1,0 +1,355 @@
+/* CSS Trang chủ cho độc giả */
+body {
+    overflow-x: hidden;
+}
+
+.reader-home {
+    width: calc(100% - 205px);
+    margin-left: 205px;
+    padding: 22px 22px 35px;
+    box-sizing: border-box;
+    background: #f8f9fc;
+    min-height: calc(100vh - 60px);
+}
+
+/* Banner */
+.home-banner {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    margin-bottom: 22px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.banner-image {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+.banner-content {
+    position: absolute;
+    inset: 0;
+    padding: 12.5px 30px;
+    box-sizing: border-box;
+    color: #fff;
+}
+
+.banner-content h1 {
+    margin: 0 0 8px;
+    font-size: 25px;
+    line-height: 1.5;
+    font-weight: 700;
+}
+
+.banner-content p {
+    margin: 0 0 13px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+/* Ô tìm kiếm */
+.search-form {
+    position: relative;
+    width: 500px;
+    height: 42px;
+    margin: 0;
+}
+
+.search-form input {
+    width: 100%;
+    height: 47.5px;
+    padding: 0 48px 0 14px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    border-radius: 6px;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+}
+
+.search-form input::placeholder {
+    color: #aaa;
+}
+
+.search-form button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 85px;
+    height: 32.5px;
+    padding: 0;
+    border: none;
+    border-radius: 5px;
+    background: #3575e5;
+    color: #fff;
+    font-size: 13px;
+    cursor: pointer;
+    margin: 7.5px;
+}
+
+.search-form button:hover {
+    background: #2864d0;
+}
+
+/* Lịch sử tìm kiếm */
+.search-history {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 15px;
+    color: #fff;
+    font-size: 10px;
+    line-height: 1;
+}
+
+.history-title {
+    flex-shrink: 0;
+    white-space: nowrap;
+    font-size: 12px;
+}
+
+.history-list {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.history-item {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    border-radius: 12px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 12px;
+    transition: background 0.25s ease;
+}
+
+.history-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.empty-history {
+    opacity: 0.8;
+    font-size: 12.5px;
+}
+
+/* Section */
+.book-section,
+.category-section {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.section-header h2 {
+    margin: 0;
+    color: #222;
+    font-size: 18px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+.section-header a {
+    color: #3974d5;
+    text-decoration: none;
+    font-size: 15px;
+    white-space: nowrap;
+}
+
+.section-header a:hover {
+    text-decoration: underline;
+}
+
+/* Sách */
+.book-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.book-card {
+    display: block;
+    min-width: 0;
+    padding: 17.5px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    color: #222;
+    text-decoration: none;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.book-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+
+/* Ảnh bìa */
+.book-cover {
+    width: 100%;
+    height: 145px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 7px;
+}
+
+.book-cover img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: contain;
+}
+
+.no-cover {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f1f3f5;
+    color: #999;
+    font-size: 10px;
+}
+
+/* Thông tin sách */
+.book-info {
+    min-width: 0;
+}
+
+.book-info h3 {
+    margin: 0 0 3px;
+    color: #222;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Tác giả */
+.book-author {
+    margin: 0;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Năm xuất bản */
+.book-year {
+    display: block;
+    margin-top: 2px;
+    color: #777;
+    font-size: 10px;
+    line-height: 1.5;
+}
+
+/* Đánh giá */
+.book-rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    margin-top: 5px;
+    color: #222;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.star {
+    color: #f2b01e;
+    font-size: 12px;
+}
+
+/* Thể loại */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 9px;
+}
+
+.category-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 12.5px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    color: #222;
+    text-decoration: none;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+}
+
+/* Icon thể loại */
+.category-icon {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.category-icon i {
+    font-size: 18px;
+}
+
+/* Thông tin thể loại */
+.category-info {
+    min-width: 0;
+}
+
+.category-info h3 {
+    margin: 0;
+    color: #444;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: bold;
+    white-space: normal;
+}
+
+.category-info span {
+    display: block;
+    margin-top: 1px;
+    color: #888;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Không có dữ liệu */
+.empty-data {
+    margin: 8px 0;
+    color: #999;
+    font-size: 12px;
+}

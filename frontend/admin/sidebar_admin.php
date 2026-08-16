@@ -33,16 +33,16 @@
                     <span>Dashboard</span>
                 </a>
             </li>
+
+            <li>
+                <a href="#">
+                    <i class="bi bi-people"></i>
+                    <span>Quản lý độc giả</span>
+                </a>
+            </li>
             
             <!-- chức năng của admin -->
             <?php if ($_SESSION['admin']['role'] === 'admin'): ?>
-                <li>
-                    <a href="#">
-                        <i class="bi bi-people"></i>
-                        <span>Quản lý độc giả</span>
-                    </a>
-                </li>
-
                 <li>
                     <a href="#">
                         <i class="bi bi-person-badge"></i>
@@ -77,13 +77,6 @@
                     <a href="#">
                         <i class="bi bi-book"></i>
                         <span>Quản lý sách</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <i class="bi bi-people"></i>
-                        <span>Quản lý độc giả</span>
                     </a>
                 </li>
 

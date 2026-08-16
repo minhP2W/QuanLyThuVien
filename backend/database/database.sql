@@ -8,6 +8,7 @@ DROP TABLE IF EXISTS `reservations`;
 DROP TABLE IF EXISTS `reviews`;
 DROP TABLE IF EXISTS `notifications`;
 DROP TABLE IF EXISTS `return_details`;
+DROP TABLE IF EXISTS `fines`;
 DROP TABLE IF EXISTS `return_slips`;
 DROP TABLE IF EXISTS `borrow_details`;
 DROP TABLE IF EXISTS `borrow_slips`;
@@ -45,7 +46,9 @@ CREATE TABLE `authors` (
 -- =========================
 CREATE TABLE `categories` (
     `category_id` INT AUTO_INCREMENT PRIMARY KEY,          -- Mã thể loại
-    `category_name` VARCHAR(100) NOT NULL UNIQUE           -- Tên thể loại
+    `category_name` VARCHAR(100) NOT NULL UNIQUE,          -- Tên thể loại
+    `icon` VARCHAR(50),                                    -- Icon thể loại
+    `icon_color` VARCHAR(20)                               -- Màu icon thể loại
 );
 
 -- =========================
@@ -54,8 +57,8 @@ CREATE TABLE `categories` (
 CREATE TABLE `publishers` (
     `publisher_id` INT AUTO_INCREMENT PRIMARY KEY,         -- Mã nhà xuất bản
     `publisher_name` VARCHAR(150) NOT NULL,                -- Tên nhà xuất bản
-    `address` VARCHAR(255),                                -- Địa chỉ
-    `phone` VARCHAR(20)                                    -- Số điện thoại
+    `address` VARCHAR(255) NOT NULL,                       -- Địa chỉ
+    `phone` VARCHAR(20) NOT NULL                           -- Số điện thoại
 );
 
 -- =========================
@@ -156,7 +159,7 @@ CREATE TABLE `return_slips` (
     `borrow_id` INT NOT NULL UNIQUE,                       -- Mã phiếu mượn tương ứng
     `staff_id` INT NOT NULL,                               -- Mã thủ thư xử lý trả sách
     `return_date` DATE NOT NULL,                           -- Ngày trả
-    `total_fine` DECIMAL(10,2) DEFAULT 0,                  -- Tổng tiền phạt
+    `total_fine` DECIMAL(12,0) NOT NULL DEFAULT 0,         -- Tổng tiền phạt
     `note` TEXT,                                           -- Ghi chú
 
     CONSTRAINT `fk_return_borrow`
@@ -169,18 +172,26 @@ CREATE TABLE `return_slips` (
 );
 
 -- =========================
--- 10. RETURN DETAILS -- Bảng chi tiết phiếu trả
+-- 10. FINES -- Bảng tiền phạt
+-- =========================
+CREATE TABLE `fines` (
+    `fine_id` INT AUTO_INCREMENT PRIMARY KEY,              -- Mã tiền phạt
+    `overdue_days` INT NOT NULL DEFAULT 0,                 -- Số ngày trả quá hạn
+    `condition_status` ENUM('Normal','Damaged','Lost')
+                     DEFAULT 'Normal' NOT NULL,            -- Tình trạng sách
+    `damage_note` TEXT,                                    -- Ghi chú thiệt hại
+    `fine` DECIMAL(12,0) NOT NULL DEFAULT 0                -- Tiền phạt
+);
+
+-- =========================
+-- 11. RETURN DETAILS -- Bảng chi tiết phiếu trả
 -- =========================
 CREATE TABLE `return_details` (
     `detail_id` INT AUTO_INCREMENT PRIMARY KEY,            -- Mã chi tiết phiếu trả
     `return_id` INT NOT NULL,                              -- Mã phiếu trả
     `book_id` INT NOT NULL,                                -- Mã sách
     `quantity` INT DEFAULT 1,                              -- Số lượng trả
-    `overdue_days` INT DEFAULT 0,                          -- Số ngày trả quá hạn
-    `condition_status` ENUM('Normal','Damaged','Lost') 
-                     DEFAULT 'Normal' NOT NULL,            -- Tình trạng sách trả
-    `damage_note` TEXT,                                    -- Ghi chú thiệt hại
-    `fine` DECIMAL(10,2) DEFAULT 0,                        -- Tiền phạt của sách
+    `fine_id` INT UNIQUE,                                  -- Mã tiền phạt
 
     UNIQUE (`return_id`, `book_id`),
 
@@ -190,11 +201,15 @@ CREATE TABLE `return_details` (
 
     CONSTRAINT `fk_return_book`
         FOREIGN KEY (`book_id`)
-        REFERENCES `books`(`book_id`)
+        REFERENCES `books`(`book_id`),
+
+    CONSTRAINT `fk_return_fine`
+        FOREIGN KEY (`fine_id`)
+        REFERENCES `fines`(`fine_id`)
 );
 
 -- =========================
--- 11. NOTIFICATIONS -- Bảng thông báo
+-- 12. NOTIFICATIONS -- Bảng thông báo
 -- =========================
 CREATE TABLE `notifications` (
     `notification_id` INT AUTO_INCREMENT PRIMARY KEY,      -- Mã thông báo
@@ -211,7 +226,7 @@ CREATE TABLE `notifications` (
 );
 
 -- =========================
--- 12. REVIEWS -- Bảng đánh giá sách
+-- 13. REVIEWS -- Bảng đánh giá sách
 -- =========================
 CREATE TABLE `reviews` (
     `review_id` INT AUTO_INCREMENT PRIMARY KEY,            -- Mã đánh giá
@@ -234,7 +249,7 @@ CREATE TABLE `reviews` (
 );
 
 -- =========================
--- 13. RESERVATIONS -- Bảng đặt trước sách
+-- 14. RESERVATIONS -- Bảng đặt trước sách
 -- =========================
 CREATE TABLE `reservations` (
     `reservation_id` INT AUTO_INCREMENT PRIMARY KEY,       -- Mã đặt trước
@@ -256,7 +271,7 @@ CREATE TABLE `reservations` (
 );
 
 -- =========================
--- 14. SEARCH HISTORIES -- Bảng lịch sử tìm kiếm
+-- 15. SEARCH HISTORIES -- Bảng lịch sử tìm kiếm
 -- =========================
 CREATE TABLE search_histories (
     `history_id` INT AUTO_INCREMENT PRIMARY KEY,          -- Mã lịch sử
@@ -271,7 +286,7 @@ CREATE TABLE search_histories (
 );
 
 -- =========================
--- 15. FAVORITES -- Bảng sách yêu thích
+-- 16. FAVORITES -- Bảng sách yêu thích
 -- =========================
 CREATE TABLE `favorites` (
     `favorite_id` INT AUTO_INCREMENT PRIMARY KEY,          -- Mã yêu thích
@@ -309,30 +324,42 @@ INSERT INTO `users` (`username`, `password`, `full_name`, `role`) VALUES
 -- =====================================
 
 INSERT INTO `authors` (`author_name`, `biography`) VALUES
-('Nguyễn Nhật Ánh', 'Nhà văn nổi tiếng với các tác phẩm dành cho thiếu nhi và tuổi mới lớn.'),
-('Nam Cao', 'Nhà văn hiện thực Việt Nam trước năm 1945.'),
-('Tô Hoài', 'Tác giả Dế Mèn Phiêu Lưu Ký.'),
-('Dale Carnegie', 'Tác giả sách phát triển bản thân nổi tiếng.'),
-('Robert C. Martin', 'Tác giả Clean Code.'),
-('J.K. Rowling', 'Tác giả Harry Potter.'),
-('George Orwell', 'Tác giả 1984 và Animal Farm.'),
-('Paulo Coelho', 'Tác giả Nhà Giả Kim.'),
-('Haruki Murakami', 'Nhà văn Nhật Bản.'),
-('Stephen King', 'Nhà văn chuyên về tiểu thuyết kinh dị.');
+('Nguyễn Nhật Ánh', 'Nhà văn Việt Nam nổi tiếng với nhiều tác phẩm dành cho thiếu nhi và tuổi mới lớn.'),
+('Nam Cao', 'Nhà văn hiện thực nổi tiếng của Việt Nam trước Cách mạng tháng Tám.'),
+('Tô Hoài', 'Nhà văn Việt Nam, nổi tiếng với tác phẩm Dế Mèn Phiêu Lưu Ký.'),
+('Dale Carnegie', 'Tác giả người Mỹ nổi tiếng với các sách về giao tiếp và phát triển bản thân.'),
+('Robert C. Martin', 'Kỹ sư phần mềm và tác giả nổi tiếng với các sách về phát triển phần mềm.'),
+('J.K. Rowling', 'Nhà văn người Anh, tác giả bộ truyện Harry Potter.'),
+('George Orwell', 'Nhà văn và nhà báo người Anh, nổi tiếng với 1984 và Animal Farm.'),
+('Paulo Coelho', 'Nhà văn Brazil nổi tiếng với các tác phẩm mang tính triết lý và truyền cảm hứng.'),
+('Haruki Murakami', 'Nhà văn Nhật Bản nổi tiếng với nhiều tiểu thuyết đương đại.'),
+('Stephen King', 'Nhà văn Mỹ nổi tiếng với các tiểu thuyết kinh dị và kỳ ảo.'),
+('Eric Ries', 'Doanh nhân và tác giả nổi tiếng với phương pháp Lean Startup.'),
+('Robert Kiyosaki', 'Tác giả người Mỹ nổi tiếng với các sách về tài chính cá nhân và đầu tư.'),
+('Napoleon Hill', 'Tác giả người Mỹ nổi tiếng với các tác phẩm về thành công và phát triển cá nhân.'),
+('James Clear', 'Tác giả người Mỹ nổi tiếng với các nội dung về thói quen và phát triển bản thân.'),
+('Yuval Noah Harari', 'Sử gia người Israel, tác giả nhiều sách về lịch sử và tương lai nhân loại.'),
+('Stephen Hawking', 'Nhà vật lý lý thuyết người Anh, nổi tiếng với các công trình và sách phổ biến khoa học.'),
+('Carl Sagan', 'Nhà thiên văn học và nhà khoa học Mỹ, nổi tiếng với các tác phẩm phổ biến khoa học.'),
+('Cambridge University Press & Assessment', 'Đơn vị xuất bản các tài liệu học thuật và giáo trình tiếng Anh của Cambridge.'),
+('Raymond Murphy', 'Tác giả nổi tiếng với các giáo trình ngữ pháp tiếng Anh.'),
+('Norman Lewis', 'Tác giả và chuyên gia ngôn ngữ nổi tiếng với các tài liệu học tiếng Anh.'),
+('Philip Kotler', 'Giáo sư và tác giả nổi tiếng trong lĩnh vực marketing.'),
+('James C. Collins', 'Tác giả và nhà nghiên cứu nổi tiếng trong lĩnh vực quản trị và kinh doanh.');
 
 -- =====================================
 -- CATEGORIES
 -- =====================================
 
-INSERT INTO `categories` (`category_name`) VALUES
-('Tiểu thuyết'),
-('Công nghệ thông tin'),
-('Kỹ năng sống'),
-('Kinh tế'),
-('Văn học'),
-('Thiếu nhi'),
-('Ngoại ngữ'),
-('Khoa học');
+INSERT INTO `categories` (`category_name`, `icon`, `icon_color`) VALUES
+('Tiểu thuyết', 'bi-book', '#3975db'),
+('Công nghệ thông tin', 'bi-laptop', '#20a486'),
+('Kỹ năng sống', 'bi-person-check', '#e59a17'),
+('Kinh tế', 'bi-graph-up', '#7656d6'),
+('Văn học', 'bi-book-half', '#d95b86'),
+('Thiếu nhi', 'bi-balloon', '#3c8dcc'),
+('Ngoại ngữ', 'bi-translate', '#9b5dcc'),
+('Khoa học', 'bi-lightbulb', '#55a94f');
 
 -- =====================================
 -- PUBLISHERS
@@ -346,10 +373,15 @@ INSERT INTO `publishers` (`publisher_name`, `address`, `phone`) VALUES
 ('NXB Thống Kê', '98 Hoàng Quốc Việt, Hà Nội', '02437562633'),
 ('NXB Tổng Hợp TP.HCM', '62 Nguyễn Thị Minh Khai, TP.HCM', '02838296764'),
 ('NXB Văn Học', '18 Nguyễn Trường Tộ, Hà Nội', '02439438213'),
-('NXB Hồng Đức', '65 Tràng Thi, Hà Nội', '02439260024');
+('NXB Hồng Đức', '65 Tràng Thi, Hà Nội', '02439260024'),
+('NXB Thế Giới', '46 Trần Hưng Đạo, Hà Nội', '02439440634'),
+('NXB Phụ Nữ Việt Nam', '39 Hàng Chuối, Hà Nội', '02439710717'),
+('NXB Đại Học Kinh Tế Quốc Dân', '207 Giải Phóng, Hà Nội', '02436280280'),
+('NXB Bách Khoa Hà Nội', 'Số 1 Đại Cồ Việt, Hà Nội', '02438683475'),
+('NXB Cambridge University Press', 'Cambridge, United Kingdom', '+44 1223 358331');
 
 -- =====================================
--- BOOKS (1 - 25)
+-- BOOKS
 -- =====================================
 
 INSERT INTO `books`
@@ -407,57 +439,55 @@ VALUES
 
 ('9786041000035','Cujo',10,7,1,2018,6,4,195000,'cujo.jpg'),
 
-('9786041000036','Lập Trình PHP Cơ Bản',5,3,2,2023,15,12,165000,'php_basic.jpg'),
+('9786041000036','Lập Trình PHP Cơ Bản',5,12,2,2023,15,12,165000,'php_basic.jpg'),
 
-('9786041000037','PHP & MySQL Web Development',5,3,2,2022,12,8,215000,'php_mysql.jpg'),
+('9786041000037','PHP & MySQL Web Development',5,12,2,2022,12,8,215000,'php_mysql.jpg'),
 
-('9786041000038','Java Programming',5,3,2,2021,18,15,195000,'java_programming.jpg'),
+('9786041000038','Java Programming',5,12,2,2021,18,15,195000,'java_programming.jpg'),
 
-('9786041000039','Python Cơ Bản',5,3,2,2024,20,18,185000,'python_basic.jpg'),
+('9786041000039','Python Cơ Bản',5,12,2,2024,20,18,185000,'python_basic.jpg'),
 
-('9786041000040','Python Nâng Cao',5,3,2,2024,10,9,225000,'python_advanced.jpg'),
+('9786041000040','Python Nâng Cao',5,12,2,2024,10,9,225000,'python_advanced.jpg'),
 
-('9786041000041','Learning SQL',5,3,2,2022,14,10,180000,'learning_sql.jpg'),
+('9786041000041','Learning SQL',5,12,2,2022,14,10,180000,'learning_sql.jpg'),
 
-('9786041000042','Database System Concepts',5,3,2,2020,8,5,245000,'database_system.jpg'),
+('9786041000042','Database System Concepts',5,12,2,2020,8,5,245000,'database_system.jpg'),
 
-('9786041000043','HTML & CSS Design',5,3,2,2023,16,13,170000,'html_css.jpg'),
+('9786041000043','HTML & CSS Design',5,12,2,2023,16,13,170000,'html_css.jpg'),
 
-('9786041000044','JavaScript The Definitive Guide',5,3,2,2021,10,7,235000,'javascript.jpg'),
+('9786041000044','JavaScript The Definitive Guide',5,12,2,2021,10,7,235000,'javascript.jpg'),
 
-('9786041000045','You Don''t Know JS',5,3,2,2022,12,10,220000,'ydkjs.jpg'),
+('9786041000045','You Don''t Know JS',5,12,2,2022,12,10,220000,'ydkjs.jpg'),
 
-('9786041000046','Nguyên Lý Marketing',4,5,4,2020,15,12,150000,'marketing.jpg'),
+('9786041000046','Nguyên Lý Marketing',21,11,4,2020,15,12,150000,'marketing.jpg'),
 
-('9786041000047','Khởi Nghiệp Tinh Gọn',4,5,4,2022,10,7,165000,'lean_startup.jpg'),
+('9786041000047','Khởi Nghiệp Tinh Gọn',11,11,4,2022,10,7,165000,'lean_startup.jpg'),
 
-('9786041000048','Cha Giàu Cha Nghèo',4,5,4,2021,18,15,135000,'rich_dad.jpg'),
+('9786041000048','Cha Giàu Cha Nghèo',12,11,4,2021,18,15,135000,'rich_dad.jpg'),
 
-('9786041000049','Think And Grow Rich',4,5,4,2019,12,10,145000,'think_grow_rich.jpg'),
+('9786041000049','Think And Grow Rich',13,11,4,2019,12,10,145000,'think_grow_rich.jpg'),
 
-('9786041000050','Atomic Habits',4,5,3,2023,20,17,185000,'atomic_habits.jpg'),
+('9786041000050','Atomic Habits',14,10,3,2023,20,17,185000,'atomic_habits.jpg'),
 
-('9786041000051','IELTS Cambridge 18',4,3,7,2024,25,20,210000,'cambridge18.jpg'),
+('9786041000051','IELTS Cambridge 18',18,13,7,2024,25,20,210000,'cambridge18.jpg'),
 
-('9786041000052','English Grammar In Use',4,3,7,2022,22,18,195000,'grammar_in_use.jpg'),
+('9786041000052','English Grammar In Use',19,13,7,2022,22,18,195000,'grammar_in_use.jpg'),
 
-('9786041000053','Oxford Word Skills',4,3,7,2021,16,14,175000,'word_skills.jpg'),
+('9786041000053','Oxford Word Skills',20,13,7,2021,16,14,175000,'word_skills.jpg'),
 
-('9786041000054','Basic English Conversation',4,3,7,2023,18,16,160000,'basic_english.jpg'),
+('9786041000054','Basic English Conversation',18,13,7,2023,18,16,160000,'basic_english.jpg'),
 
-('9786041000055','Vũ Trụ Trong Vỏ Hạt Dẻ',8,7,8,2019,10,8,170000,'universe.jpg'),
+('9786041000055','Vũ Trụ Trong Vỏ Hạt Dẻ',16,9,8,2019,10,8,170000,'universe.jpg'),
 
-('9786041000056','Lược Sử Thời Gian',8,7,8,2020,12,10,180000,'brief_history_time.jpg'),
+('9786041000056','Lược Sử Thời Gian',16,9,8,2020,12,10,180000,'brief_history_time.jpg'),
 
-('9786041000057','Cosmos',8,7,8,2018,8,6,190000,'cosmos.jpg'),
+('9786041000057','Cosmos',17,9,8,2018,8,6,190000,'cosmos.jpg'),
 
-('9786041000058','Sapiens',8,7,8,2023,18,15,220000,'sapiens.jpg'),
+('9786041000058','Sapiens',15,9,8,2023,18,15,220000,'sapiens.jpg'),
 
-('9786041000059','Homo Deus',8,7,8,2022,15,11,225000,'homo_deus.jpg'),
+('9786041000059','Homo Deus',15,9,8,2022,15,11,225000,'homo_deus.jpg'),
 
-('9786041000060','21 Bài Học Cho Thế Kỷ 21',8,7,8,2021,14,10,215000,'21_lessons.jpg');
-
-UPDATE `books` SET `available_quantity` = `available_quantity` - 1 WHERE `book_id` IN (41, 42, 43, 44, 45, 46, 47, 48, 49, 50);
+('9786041000060','21 Bài Học Cho Thế Kỷ 21',15,9,8,2021,14,10,215000,'21_lessons.jpg');
 
 -- =====================================
 -- READERS (20 độc giả)
@@ -643,53 +673,73 @@ VALUES
 (10,3,'2026-08-05',0,'Trả đúng hạn');
 
 -- =====================================
+-- FINES
+-- =====================================
+
+INSERT INTO `fines`
+(`overdue_days`, `condition_status`, `damage_note`, `fine`)
+VALUES
+(1, 'Normal', NULL, 5000),
+(1, 'Normal', NULL, 5000),
+
+(3, 'Normal', NULL, 15000),
+(3, 'Normal', NULL, 15000),
+
+(0, 'Damaged', 'Bìa sách bị rách', 30000),
+(0, 'Damaged', 'Trang sách bị nhàu', 20000),
+
+(0, 'Lost', 'Độc giả làm mất sách', 180000),
+
+(1, 'Normal', NULL, 5000),
+(1, 'Normal', NULL, 5000);
+
+-- =====================================
 -- RETURN_DETAILS (20 chi tiết)
 -- =====================================
 
 INSERT INTO `return_details`
-(`return_id`, `book_id`, `quantity`, `overdue_days`,
-`condition_status`, `damage_note`, `fine`)
+(`return_id`, `book_id`, `quantity`, `fine_id`)
 VALUES
 
 -- Return 1
-(1,1,1,0,'Normal',NULL,0),
-(1,11,1,0,'Normal',NULL,0),
+(1,1,1,NULL),
+(1,11,1,NULL),
 
 -- Return 2
-(2,2,1,1,'Normal',NULL,5000),
-(2,17,1,1,'Normal',NULL,5000),
+(2,2,1,1),
+(2,17,1,2),
 
 -- Return 3
-(3,7,1,0,'Normal',NULL,0),
-(3,21,1,0,'Normal',NULL,0),
+(3,7,1,NULL),
+(3,21,1,NULL),
 
 -- Return 4
-(4,14,1,3,'Normal',NULL,15000),
-(4,29,1,3,'Normal',NULL,15000),
+(4,14,1,3),
+(4,29,1,4),
 
 -- Return 5
-(5,18,1,0,'Normal',NULL,0),
-(5,31,1,0,'Normal',NULL,0),
+(5,18,1,NULL),
+(5,31,1,NULL),
 
 -- Return 6
-(6,9,1,0,'Damaged','Bìa sách bị rách',30000),
-(6,36,1,0,'Damaged','Trang sách bị nhàu',20000),
+(6,9,1,5),
+(6,36,1,6),
 
 -- Return 7
-(7,10,1,0,'Normal',NULL,0),
-(7,37,1,0,'Normal',NULL,0),
+(7,10,1,NULL),
+(7,37,1,NULL),
 
 -- Return 8
-(8,24,1,0,'Lost','Độc giả làm mất sách',180000),
-(8,38,1,0,'Normal',NULL,20000),
+(8,24,1,7),
+(8,38,1,8),
 
 -- Return 9
-(9,25,1,1,'Normal',NULL,5000),
-(9,39,1,1,'Normal',NULL,5000),
+(9,25,1,9),
+(9,39,1,10),
 
 -- Return 10
-(10,30,1,0,'Normal',NULL,0),
-(10,40,1,0,'Normal',NULL,0);
+(10,30,1,NULL),
+(10,40,1,NULL);
 
 -- =====================================
 -- 11. NOTIFICATIONS
@@ -720,7 +770,7 @@ VALUES
 (20,'Chào mừng','Chào mừng bạn đến với Librio.',1);
 
 -- =====================================
--- 12. REVIEWS
+-- REVIEWS
 -- =====================================
 
 INSERT INTO `reviews`
@@ -730,30 +780,30 @@ VALUES
 (2,2,5,'Đưa mình trở về tuổi thơ.'),
 (3,7,4,'Tác phẩm thiếu nhi kinh điển.'),
 (4,14,5,'Harry Potter mở đầu rất cuốn hút.'),
-(5,18,4,'Nhà Giả Kim truyền cảm hứng.'),
+(5,18,4,'Animal Farm có nội dung sâu sắc và đáng suy ngẫm.'),
 (6,21,5,'Clean Code rất hữu ích cho lập trình viên.'),
-(7,24,5,'Python Cơ Bản dễ học, nhiều ví dụ.'),
-(8,29,5,'Atomic Habits giúp thay đổi thói quen hiệu quả.'),
-(9,31,4,'English Grammar In Use rất dễ hiểu.'),
-(10,36,5,'Lược Sử Thời Gian cực kỳ thú vị.'),
-(11,37,4,'Cosmos trình bày khoa học rất hấp dẫn.'),
-(12,38,5,'Sapiens là cuốn sách đáng đọc.'),
-(13,39,4,'Homo Deus có nhiều góc nhìn mới.'),
-(14,40,5,'21 Bài Học Cho Thế Kỷ 21 rất thực tế.'),
-(15,41,4,'Learning SQL phù hợp cho người mới.'),
-(16,42,5,'Database System Concepts rất đầy đủ.'),
-(17,43,5,'HTML & CSS Design trình bày đẹp và dễ hiểu.'),
-(18,44,5,'JavaScript The Definitive Guide rất chi tiết.'),
-(19,45,4,'You Don''t Know JS khá chuyên sâu.'),
-(20,50,5,'Basic English Conversation rất hữu ích.'),
-(1,46,5,'Nguyên Lý Marketing cung cấp kiến thức nền tảng tốt.'),
-(2,47,4,'Khởi Nghiệp Tinh Gọn rất phù hợp cho startup.'),
-(3,48,5,'Cha Giàu Cha Nghèo thay đổi tư duy tài chính.'),
-(4,49,4,'Think And Grow Rich truyền nhiều động lực.'),
-(5,50,5,'Basic English Conversation rất phù hợp để luyện giao tiếp.');
+(7,29,5,'Python Cơ Bản dễ học, nhiều ví dụ.'),
+(8,40,5,'Atomic Habits giúp thay đổi thói quen hiệu quả.'),
+(9,42,4,'English Grammar In Use rất dễ hiểu.'),
+(10,46,5,'Lược Sử Thời Gian cực kỳ thú vị.'),
+(11,47,4,'Cosmos trình bày khoa học rất hấp dẫn.'),
+(12,48,5,'Sapiens là cuốn sách đáng đọc.'),
+(13,49,4,'Homo Deus có nhiều góc nhìn mới.'),
+(14,50,5,'21 Bài Học Cho Thế Kỷ 21 rất thực tế.'),
+(15,31,4,'Learning SQL phù hợp cho người mới.'),
+(16,32,5,'Database System Concepts rất đầy đủ.'),
+(17,33,5,'HTML & CSS Design trình bày đẹp và dễ hiểu.'),
+(18,34,5,'JavaScript The Definitive Guide rất chi tiết.'),
+(19,35,4,'You Don''t Know JS khá chuyên sâu.'),
+(20,44,5,'Basic English Conversation rất hữu ích.'),
+(1,36,5,'Nguyên Lý Marketing cung cấp kiến thức nền tảng tốt.'),
+(2,37,4,'Khởi Nghiệp Tinh Gọn rất phù hợp cho startup.'),
+(3,38,5,'Cha Giàu Cha Nghèo thay đổi tư duy tài chính.'),
+(4,39,4,'Think And Grow Rich truyền nhiều động lực.'),
+(5,44,5,'Basic English Conversation rất phù hợp để luyện giao tiếp.');
 
 -- =====================================
--- 13. RESERVATIONS
+-- RESERVATIONS
 -- =====================================
 
 INSERT INTO `reservations`
@@ -773,7 +823,7 @@ VALUES
 (12,50,'2026-08-05','Pending');
 
 -- =====================================
--- 14. SEARCH_HISTORIES
+-- SEARCH_HISTORIES
 -- =====================================
 
 INSERT INTO `search_histories`
@@ -841,7 +891,7 @@ VALUES
 (20,'JavaScript');
 
 -- =====================================
--- 15. FAVORITES
+-- FAVORITES
 -- =====================================
 
 INSERT INTO `favorites`

@@ -10,44 +10,48 @@
         </li>
 
         <li>
-            <a href="#">
+            <a href="#" class="reader-login-required">
                 <i class="bi bi-book"></i>
                 <span>Sách của tôi</span>
             </a>
         </li>
 
         <li>
-            <a href="#">
+            <a href="#" class="reader-login-required">
                 <i class="bi bi-clock-history"></i>
                 <span>Lịch sử mượn</span>
             </a>
         </li>
 
         <li>
-            <a href="#">
+            <a href="#" class="reader-login-required">
                 <i class="bi bi-journal-plus"></i>
                 <span>Đặt trước</span>
             </a>
         </li>
 
         <li>
-            <a href="#">
+            <a href="#" class="reader-login-required">
                 <i class="bi bi-heart"></i>
                 <span>Yêu thích</span>
             </a>
         </li>
 
         <li>
-            <a href="#">
+            <a href="<?= BASE_URL ?>/index.php?page=notification" 
+               class="reader-login-required <?= ($page ?? '') == 'notification' ? 'active' : '' ?>">
                 <i class="bi bi-bell"></i>
                 <span>Thông báo</span>
 
-                <span class="badge">3</span>
+                <?php if ($unreadNotificationCount > 0): ?>
+                    <span class="badge"><?= $unreadNotificationCount ?></span>
+                <?php endif; ?>
             </a>
         </li>
 
         <li>
-            <a href="<?= BASE_URL ?>/index.php?page=profile_reader" class="<?= ($page ?? '') == 'profile_reader' ? 'active' : '' ?>">
+            <a href="<?= BASE_URL ?>/index.php?page=profile_reader" 
+               class="reader-login-required <?= ($page ?? '') == 'profile_reader' ? 'active' : '' ?>">
                 <i class="bi bi-person"></i>
                 <span>Hồ sơ cá nhân</span>
             </a>

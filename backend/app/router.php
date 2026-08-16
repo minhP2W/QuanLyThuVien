@@ -16,6 +16,7 @@
     require_once __DIR__ . '/controllers/reader/ReaderAuthController.php';
     require_once __DIR__ . '/controllers/reader/HomeController.php';
     require_once __DIR__ . '/controllers/reader/ReaderProfileController.php';
+    require_once __DIR__ . '/controllers/reader/NotificationController.php';
 
     // "bộ điều hướng" website
     $page = $_GET['page'] ?? 'home';
@@ -85,6 +86,11 @@
         case 'changePassword_reader':
             AuthMiddleware::reader();
             ReaderProfileController::changePassword();
+            break;
+
+        case 'notification':
+            AuthMiddleware::reader();
+            NotificationController::notification();
             break;
 
         // Error
