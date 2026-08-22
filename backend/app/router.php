@@ -17,9 +17,20 @@
     require_once __DIR__ . '/controllers/reader/HomeController.php';
     require_once __DIR__ . '/controllers/reader/ReaderProfileController.php';
     require_once __DIR__ . '/controllers/reader/NotificationController.php';
+    require_once __DIR__ . '/controllers/reader/BookReaderController.php';
 
     // "bộ điều hướng" website
     $page = $_GET['page'] ?? 'home';
+
+    // Nếu rời khỏi trang thông báo thì đánh dấu tất cả thông báo là đã đọc
+    if (isset($_SESSION['reader']['reader_id']) && isset($_SESSION['current_page']) && $_SESSION['current_page'] === 'notification' &&
+        $page !== 'notification'
+    ) {
+        Notification::markAllAsRead($_SESSION['reader']['reader_id']);
+    }
+
+    // Lưu trang hiện tại
+    $_SESSION['current_page'] = $page;
 
     switch ($page) {
         // Admin + Staff
@@ -91,6 +102,23 @@
         case 'notification':
             AuthMiddleware::reader();
             NotificationController::notification();
+            break;
+
+        case 'book_reader':
+            BookReaderController::book();
+            break;
+
+        case 'favorite':
+            AuthMiddleware::reader();
+            BookReaderController::favorite();
+            break;
+
+        case 'toggleFavorite':
+            BookReaderController::toggleFavorite();
+            break;
+
+        case 'category_reader':
+            BookReaderController::category();
             break;
 
         // Error

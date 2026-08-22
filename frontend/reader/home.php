@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librio - Trang chủ</title>
+    <title>Trang chủ - Librio</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -18,9 +18,10 @@
 </head>
 <body>
     <?php require_once 'navbar.php';?>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/navbar.js"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/navbar.js?v=1.0"></script>
 
     <?php require_once 'sidebar_reader.php';?>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
 
     <!-- Hiển thị thông báo đăng ký, đăng nhập thành công -->
     <?php if (isset($_SESSION['success'])): ?>
@@ -60,14 +61,9 @@
 
                 <!-- Ô tìm kiếm -->
                 <form action="<?= BASE_URL ?>/index.php" method="GET" class="search-form">
-                    <input type="hidden" name="page" value="books">
+                    <input type="hidden" name="page" value="book_reader">
 
-                    <input
-                        type="text"
-                        name="keyword"
-                        placeholder="Tìm kiếm sách, tác giả, thể loại..."
-                        autocomplete="off"
-                    >
+                    <input type="text" name="keyword" placeholder="Tìm kiếm sách, tác giả, thể loại..." autocomplete="off">
 
                     <button type="submit" aria-label="Tìm kiếm">
                         Tìm kiếm
@@ -81,7 +77,7 @@
 
                         <div class="history-list">
                             <?php foreach ($searchHistories as $history): ?>
-                                <a href="<?= BASE_URL ?>/index.php?page=book&keyword=<?= urlencode($history['keyword']) ?>"
+                                <a href="<?= BASE_URL ?>/index.php?page=book_reader&keyword=<?= urlencode($history['keyword']) ?>"
                                 class="history-item">
                                     <?= htmlspecialchars($history['keyword']) ?>
                                 </a>
@@ -103,7 +99,7 @@
             <div class="section-header">
                 <h2>Sách mới</h2>
 
-                <a href="<?= BASE_URL ?>/index.php?page=book">
+                <a href="<?= BASE_URL ?>/index.php?page=book_reader">
                     Xem tất cả →
                 </a>
             </div>
@@ -155,7 +151,7 @@
             <div class="section-header">
                 <h2>Sách nổi bật</h2>
 
-                <a href="<?= BASE_URL ?>/index.php?page=book">
+                <a href="<?= BASE_URL ?>/index.php?page=book_reader">
                     Xem tất cả →
                 </a>
             </div>
@@ -210,7 +206,7 @@
             <div class="section-header">
                 <h2>Thể loại</h2>
 
-                <a href="<?= BASE_URL ?>/index.php?page=category">
+                <a href="<?= BASE_URL ?>/index.php?page=category_reader">
                     Xem tất cả →
                 </a>
             </div>
@@ -218,7 +214,7 @@
             <div class="category-grid">
                 <?php if (!empty($categories)): ?>
                     <?php foreach ($categories as $category): ?>
-                        <a href="<?= BASE_URL ?>/index.php?page=books&category=<?= $category['category_id'] ?>"
+                        <a href="<?= BASE_URL ?>/index.php?page=book_reader&category=<?= $category['category_id'] ?>"
                         class="category-card">
                             <div class="category-icon" style="background: <?= htmlspecialchars($category['icon_color']) ?>20;
                                                               color: <?= htmlspecialchars($category['icon_color']) ?>;">
@@ -245,10 +241,7 @@
         </section>
     </main>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/home.js?v=1.0"></script>
     <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/sidebar_reader.js?v=1.0"></script>
 
     <?php require_once 'footer.php';?>
 </body>

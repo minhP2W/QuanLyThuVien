@@ -2,7 +2,7 @@
 <?php
     require_once __DIR__ . '/../../models/Reader.php';
 
-    require_once __DIR__ . '/BaseReaderController.php';
+    require_once __DIR__ . '/../BaseController.php';
 
     class ReaderProfileController extends BaseReaderController
     {

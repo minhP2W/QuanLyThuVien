@@ -1,0 +1,121 @@
+/* CSS Trang thể loại cho độc giả */
+body {
+    overflow-x: hidden;
+}
+
+.reader-category {
+    width: calc(100% - 205px);
+    margin-left: 205px;
+    padding: 30px 35px;
+    box-sizing: border-box;
+    background: #f8f9fc;
+    min-height: calc(100vh - 70px);
+}
+
+/* Tiêu đề */
+.category-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.category-page-header h1 {
+    margin: 0;
+    color: #222;
+    font-size: 30px;
+    line-height: 1.5;
+    font-weight: bold;
+}
+
+/* Danh sách thể loại */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 9px;
+}
+
+/* Card thể loại */
+.category-card {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    padding: 12.5px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    color: #222;
+    text-decoration: none;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.07);
+}
+
+/* Icon thể loại */
+.category-icon {
+    width: 35px;
+    height: 35px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+.category-icon i {
+    font-size: 18px;
+}
+
+/* Thông tin thể loại */
+.category-info {
+    min-width: 0;
+    flex: 1;
+}
+
+.category-info h3 {
+    margin: 0;
+    color: #222;
+    font-size: 13px;
+    line-height: 1.5;
+    font-weight: bold;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.category-info span {
+    display: block;
+    margin-top: 1px;
+    color: #777;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Mũi tên */
+.category-arrow {
+    flex-shrink: 0;
+    color: #aaa;
+    font-size: 12px;
+    transition:
+        transform 0.25s ease,
+        color 0.25s ease;
+}
+
+.category-card:hover .category-arrow {
+    color: #3974d5;
+    transform: translateX(3px);
+}
+
+/* Không có dữ liệu */
+.empty-data {
+    margin: 8px 0;
+    color: #777;
+    font-size: 13px;
+}

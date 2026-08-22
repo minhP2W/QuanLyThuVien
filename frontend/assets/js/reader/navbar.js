@@ -34,9 +34,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Chưa đăng nhập
             if (!isLoggedIn) {
-                const homeUrl = notificationBtn.dataset.homeUrl;
                 sessionStorage.setItem("scrollPosition", window.scrollY);
-                window.location.href = homeUrl + "&notification=login_required";
+
+                const url = new URL(window.location.href);
+                url.searchParams.set("notification", "login_required");
+
+                window.location.href = url.toString();
                 return;
             }
 

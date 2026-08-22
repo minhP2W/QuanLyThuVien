@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librio - Hồ sơ cá nhân</title>
+    <title>Hồ sơ cá nhân - Librio</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -12,7 +12,7 @@
 
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/navbar.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css?v=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer_reader.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/profile_reader.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
 </head>

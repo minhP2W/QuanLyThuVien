@@ -6,7 +6,7 @@ body {
 .admin-dashboard {
     width: calc(100% - 205px);
     margin-left: 205px;
-    padding: 22px 22px 35px;
+    padding: 30px 35px;
     box-sizing: border-box;
     background: #f8f9fc;
     min-height: calc(100vh - 60px);
@@ -516,6 +516,7 @@ body {
     margin-top: 1px;
     color: #777;
     font-size: 12px;
+    line-height: 1.5;
 }
 
 .book-name {

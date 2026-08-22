@@ -5,7 +5,7 @@ body {
 
 .reader-about {
     margin-left: 205px;
-    padding: 35px;
+    padding: 30px 35px;
     background: #f7f9fc;
     min-height: calc(100vh - 70px);
     box-sizing: border-box;

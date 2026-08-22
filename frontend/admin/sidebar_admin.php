@@ -25,7 +25,6 @@
 
         <!-- Menu -->
         <ul class="admin-sidebar-menu">
-
             <!-- Chung -->
             <li>
                 <a href="<?= BASE_URL ?>/index.php?page=dashboard" class="<?= ($page ?? '') == 'dashboard' ? 'active' : '' ?>">
@@ -52,8 +51,15 @@
 
                 <li>
                     <a href="#">
+                        <i class="bi bi-person"></i>
+                        <span>Tác giả</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
                         <i class="bi bi-tags"></i>
-                        <span>Danh mục</span>
+                        <span>Thể loại</span>
                     </a>
                 </li>
 
@@ -98,6 +104,13 @@
                     <a href="#">
                         <i class="bi bi-cash-coin"></i>
                         <span>Tiền phạt</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        <i class="bi bi-bell"></i>
+                        <span>Thông báo</span>
                     </a>
                 </li>
 

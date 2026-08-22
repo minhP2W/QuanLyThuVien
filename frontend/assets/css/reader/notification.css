@@ -1,0 +1,181 @@
+/* CSS trang thông báo cho độc giả */
+body {
+    overflow-x: hidden;
+}
+
+.notification-page {
+    width: calc(100% - 205px);
+    margin-left: 205px;
+    min-height: calc(100vh - 70px);
+    padding: 30px 35px;
+    box-sizing: border-box;
+    background: #f8f9fb;
+}
+
+/* Header */
+.notification-page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.notification-page-title h2 {
+    margin: 0;
+    font-size: 30px;
+    font-weight: 700;
+    color: #222;
+}
+
+/* Filter */
+.notification-filter {
+    display: flex;
+    gap: 8px;
+    background: #fff;
+    padding: 6px;
+    border-radius: 10px;
+    border: 1px solid #ececec;
+}
+
+.notification-filter a {
+    text-decoration: none;
+    padding: 9px 15px;
+    border-radius: 7px;
+    color: #777;
+    font-size: 13.75px;
+    font-weight: bold;
+    transition: .25s;
+}
+
+.notification-filter a:hover {
+    color: #2f6fed;
+    background: #f0f4ff;
+}
+
+.notification-filter a.active {
+    background: #2f6fed;
+    color: #fff;
+}
+
+/* Danh sách thông báo */
+.notification-page-list {
+    background: #fff;
+    border: 1px solid #ececec;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .05);
+}
+
+/* Một thông báo */
+.notification-page-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 20px;
+    border-bottom: 1px solid #eee;
+    transition: .2s;
+}
+
+.notification-page-item:last-child {
+    border-bottom: none;
+}
+
+.notification-page-item:hover {
+    background: #f5f7fa;
+}
+
+/* Chưa đọc */
+.notification-page-item.unread {
+    background: #eef4ff;
+}
+
+.notification-page-item.unread:hover {
+    background: #e7efff;
+}
+
+/* Icon */
+.notification-page-icon {
+    flex-shrink: 0;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #f0f2f5;
+    color: #2f6fed;
+    font-size: 18px;
+}
+
+/* Nội dung */
+.notification-page-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.notification-page-content h4 {
+    margin: 0 0 7px;
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+}
+
+.notification-page-content p {
+    margin: 0 0 8px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+}
+
+.notification-page-time {
+    font-size: 13px;
+    color: #999;
+}
+
+/* Trạng thái */
+.notification-status {
+    flex-shrink: 0;
+}
+
+.notification-status span {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.unread-label {
+    background: #e8f0ff;
+    color: #2f6fed;
+}
+
+.read-label {
+    background: #f0f0f0;
+    color: #888;
+}
+
+/* Không có thông báo */
+.notification-page-empty {
+    padding: 70px 20px;
+    text-align: center;
+    color: #999;
+}
+
+.notification-page-empty i {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 45px;
+    color: #cfd4dc;
+}
+
+.notification-page-empty h4 {
+    margin: 0 0 7px;
+    color: #555;
+    font-size: 17px;
+}
+
+.notification-page-empty p {
+    margin: 0;
+    font-size: 14px;
+}

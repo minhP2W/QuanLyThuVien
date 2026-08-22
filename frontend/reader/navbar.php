@@ -24,14 +24,16 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="<?= BASE_URL ?>/index.php?page=book_reader" 
+                   class="reader-login-required <?= ($page ?? '') == 'book_reader' ? 'active' : '' ?>">
                     <i class="bi bi-book"></i>
                     <span>Sách</span>
                 </a>
             </li>
 
             <li>
-                <a href="#">
+                <a href="<?= BASE_URL ?>/index.php?page=category_reader" 
+                   class="reader-login-required <?= ($page ?? '') == 'category_reader' ? 'active' : '' ?>">
                     <i class="bi bi-grid"></i>
                     <span>Thể loại</span>
                 </a>
@@ -46,7 +48,7 @@
             </li>
 
             <li>
-                <a href="<?= BASE_URL ?>/index.php?page=about" class="<?= ($page ?? '') == 'about' ? 'active' : '' ?>">
+                <a href="<?= BASE_URL ?>/index.php?page=about" class="reader-login-required <?= ($page ?? '') == 'about' ? 'active' : '' ?>">
                     <i class="bi bi-info-circle"></i>
                     <span>Giới thiệu</span>
                 </a>

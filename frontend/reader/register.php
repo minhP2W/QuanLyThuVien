@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librio - Đăng ký</title>
+    <title>Đăng ký - Librio</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
@@ -16,7 +16,9 @@
     <div class="register-container">
         <div class="register-card">
             <div class="register-logo">
-                <img src="<?= BASE_URL ?>/frontend/assets/images/logo.png" alt="Librio">
+                <a href="<?= BASE_URL ?>/index.php?page=home">
+                    <img src="<?= BASE_URL ?>/frontend/assets/images/logo.png" alt="Librio">
+                </a>
             </div>
 
             <h2>Đăng ký</h2>

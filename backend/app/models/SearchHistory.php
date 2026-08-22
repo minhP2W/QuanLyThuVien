@@ -22,5 +22,44 @@
 
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         }
+
+        // Thêm hoặc cập nhật lịch sử tìm kiếm
+        public static function addOrUpdate($readerId, $keyword)
+        {
+            global $conn;
+
+            // Kiểm tra từ khóa đã tồn tại
+            $sql = "SELECT history_id
+                    FROM search_histories
+                    WHERE reader_id = ? AND keyword = ?
+                    LIMIT 1";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("is", $readerId, $keyword);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+            $history = $result->fetch_assoc();
+
+            if ($history) {
+                // Đã tồn tại → cập nhật thời gian tìm kiếm
+                $sql = "UPDATE search_histories
+                        SET searched_at = CURRENT_TIMESTAMP
+                        WHERE history_id = ?";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("i", $history['history_id']);
+
+            } else {
+                // Chưa tồn tại → thêm mới
+                $sql = "INSERT INTO search_histories (reader_id, keyword)
+                        VALUES (?, ?)";
+
+                $stmt = $conn->prepare($sql);
+                $stmt->bind_param("is", $readerId, $keyword);
+            }
+
+            return $stmt->execute();
+        }
     }
 ?>

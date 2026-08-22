@@ -1,5 +1,5 @@
 <!-- Sidebar cho độc giả -->
-<aside class="reader-sidebar">
+<aside class="reader-sidebar" data-logged-in="<?= isset($_SESSION['reader']) ? 'true' : 'false' ?>">
     <!-- Phần trên -->
     <ul class="reader-sidebar-menu">
         <li>
@@ -31,7 +31,8 @@
         </li>
 
         <li>
-            <a href="#" class="reader-login-required">
+            <a href="<?= BASE_URL ?>/index.php?page=favorite" 
+               class="reader-login-required <?= ($page ?? '') == 'favorite' ? 'active' : '' ?>">
                 <i class="bi bi-heart"></i>
                 <span>Yêu thích</span>
             </a>
@@ -60,12 +61,12 @@
 
     <!-- Phần dưới -->
     <?php if (isset($_SESSION['reader'])): ?>
-    <div class="reader-sidebar-bottom">
-        <a href="#" id="logout">
-            <i class="bi bi-box-arrow-right"></i>
-            <span>Đăng xuất</span>
-        </a>
-    </div>
+        <div class="reader-sidebar-bottom">
+            <a href="#" id="logout">
+                <i class="bi bi-box-arrow-right"></i>
+                <span>Đăng xuất</span>
+            </a>
+        </div>
     <?php endif; ?>
 </aside>
 

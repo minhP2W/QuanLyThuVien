@@ -1,4 +1,4 @@
-/* CSS navbar cho trang web của reader */
+/* CSS navbar cho trang web của độc giả */
 * {
     margin: 0;
     padding: 0;
@@ -135,7 +135,6 @@ body {
     font-weight: 700;
     color: #222;
 }
-
 
 /* Danh sách thông báo */
 .reader-notification-list {

@@ -80,5 +80,56 @@
                 'unreadNotificationCount' => $unreadNotificationCount
             ];
         }
+
+        // Lấy danh sách thông báo
+        public static function getAllByReader($readerId, $status = 'all')
+        {
+            global $conn;
+
+            $sql = "SELECT notification_id, title, content, is_read, created_at
+                    FROM notifications
+                    WHERE reader_id = ?";
+
+            if ($status === 'unread') {
+                $sql .= " AND is_read = 0";
+            } elseif ($status === 'read') {
+                $sql .= " AND is_read = 1";
+            }
+
+            $sql .= " ORDER BY created_at DESC";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $readerId);
+            $stmt->execute();
+
+            $result = $stmt->get_result();
+
+            $notifications = [];
+
+            while ($row = $result->fetch_assoc()) {
+                $notifications[] = $row;
+            }
+
+            $stmt->close();
+
+            return $notifications;
+        }
+
+        // Đánh dấu tất cả đã đọc
+        public static function markAllAsRead($readerId)
+        {
+            global $conn;
+
+            $sql = "UPDATE notifications
+                    SET is_read = 1
+                    WHERE reader_id = ?
+                    AND is_read = 0";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $readerId);
+            $stmt->execute();
+
+            $stmt->close();
+        }
     }
 ?>

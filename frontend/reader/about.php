@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librio - Giới thiệu</title>
+    <title>Giới thiệu - Librio</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
@@ -14,12 +14,22 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/navbar.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
 </head>
 <body>
     <?php require_once 'navbar.php';?>
     <script src="<?= BASE_URL ?>/frontend/assets/js/reader/navbar.js"></script>
 
     <?php require_once 'sidebar_reader.php';?>
+
+    <!-- Hiển thị cảnh báo chưa vào được chức năng khi chưa đăng ký/đăng nhập -->
+    <?php if (isset($_SESSION['warning'])): ?>
+        <div class="alert-warning" id="alert-warning">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+            <span><?= $_SESSION['warning']; ?></span>
+        </div>
+        <?php unset($_SESSION['warning']); ?>
+    <?php endif; ?>
 
     <main class="reader-about">
         <h2 class="about-title">Giới thiệu và nội quy thư viện</h2>
@@ -104,6 +114,6 @@
     <?php require_once 'footer.php';?>
 
     <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/sidebar_reader.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
 </body>
 </html>

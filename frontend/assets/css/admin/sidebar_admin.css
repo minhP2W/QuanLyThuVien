@@ -10,7 +10,7 @@ body {
 }
 
 /* sidebar admin */
-.admin-sidebar{
+.admin-sidebar {
     position: fixed;
     left: 0;
     width: 205px;
@@ -23,20 +23,20 @@ body {
     padding: 20px 16px;
 }
 
-.admin-sidebar-top{
+.admin-sidebar-top {
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 15px;
 }
 
-.admin-sidebar-logo{
+.admin-sidebar-logo {
     display: flex;
     justify-content: center;
     padding-bottom: 20px;
     border-bottom: 1px solid #ececec;
 }
 
-.admin-sidebar-logo img{
+.admin-sidebar-logo img {
     width: 130px;
     height: auto;
     display: block;
@@ -79,13 +79,14 @@ body {
 .admin-sidebar-menu a {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 12.5px;
     padding: 12px 14px;
     border-radius: 10px;
     text-decoration: none;
     color: #444;
     font-size: 15px;
     transition: .25s;
+    white-space: nowrap;
 }
 
 .admin-sidebar-menu a:hover {
@@ -98,7 +99,7 @@ body {
     text-align: center;
 }
 
-.admin-sidebar-footer{
+.admin-sidebar-footer {
     display: flex; 
     flex-direction: column;
     gap: 16px;
@@ -131,7 +132,7 @@ body {
 .admin-sidebar-version {
     text-align: center;
     font-size: 12px;
-    color: #999;
+    color: #777;
 }
 
 /* Active */

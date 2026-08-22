@@ -17,7 +17,8 @@
         {
             if (!isset($_SESSION['reader'])) {
                 $_SESSION['warning'] = "Vui lòng đăng nhập trước khi sử dụng chức năng này.";
-                header("Location: " . BASE_URL . "/index.php?page=home");
+                $backUrl = $_SERVER['HTTP_REFERER'] ?? (BASE_URL . "/index.php?page=home");
+                header("Location: " . $backUrl);
                 exit;
             }
         }

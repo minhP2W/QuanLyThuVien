@@ -1,8 +1,10 @@
-<!-- điều khiển trang chủ của Reader -->
+<!-- điều khiển trang thông báo của độc giả -->
 <?php
     require_once __DIR__ . '/ReaderAuthController.php';
+    
+    require_once __DIR__ . '/../BaseController.php';
 
-    require_once __DIR__ . '/BaseReaderController.php';
+    require_once __DIR__ . '/../../models/Notification.php';
 
     class NotificationController extends BaseReaderController
     {
@@ -18,10 +20,28 @@
                 $_SESSION['warning'] = 'Vui lòng đăng nhập trước khi sử dụng chức năng này.';
             }
 
+            // Dữ liệu dùng cho navbar và sidebar
             $navbarData = self::getNavbarData();
             $notifications = $navbarData['notifications'];
             $hasUnreadNotification = $navbarData['hasUnreadNotification'];
             $unreadNotificationCount = $navbarData['unreadNotificationCount'];
+
+            // Filter thông báo
+            $status = $_GET['status'] ?? 'all';
+
+            if (!in_array($status, ['all', 'unread', 'read'])) {
+                $status = 'all';
+            }
+
+            // Nếu đã đăng nhập thì lấy danh sách thông báo
+            if ($readerId !== null) {
+
+                // Lấy danh sách trước khi đánh dấu đã đọc
+                $notifications = Notification::getAllByReader(
+                    $readerId,
+                    $status
+                );
+            }
 
             require __DIR__ . '/../../../../frontend/reader/notification.php';
         }

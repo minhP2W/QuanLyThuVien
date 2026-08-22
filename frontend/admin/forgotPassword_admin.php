@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librio - Lấy lại mật khẩu (quản trị viên/thủ thư)</title>
+    <title>Lấy lại mật khẩu - Librio</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
@@ -19,7 +19,9 @@
         <div class="login-card">
             <!-- Logo -->
             <div class="login-logo">
-                <img src="<?= BASE_URL ?>/frontend/assets/images/logo.png" alt="Librio">
+                <a href="<?= BASE_URL ?>/index.php?page=dashboard">
+                    <img src="<?= BASE_URL ?>/frontend/assets/images/logo.png" alt="Librio">
+                </a>
             </div>
 
             <h2>Quên mật khẩu</h2>

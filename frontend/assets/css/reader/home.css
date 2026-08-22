@@ -6,10 +6,10 @@ body {
 .reader-home {
     width: calc(100% - 205px);
     margin-left: 205px;
-    padding: 22px 22px 35px;
+    padding: 30px 35px;
     box-sizing: border-box;
     background: #f8f9fc;
-    min-height: calc(100vh - 60px);
+    min-height: calc(100vh - 70px);
 }
 
 /* Banner */

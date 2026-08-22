@@ -1,4 +1,4 @@
-<!-- điều khiển trang chủ của Reader -->
+<!-- điều khiển trang chủ của độc giả -->
 <?php
     require_once __DIR__ . '/ReaderAuthController.php';
 
@@ -6,7 +6,7 @@
     require_once __DIR__ . '/../../models/Book.php';
     require_once __DIR__ . '/../../models/Category.php';
 
-    require_once __DIR__ . '/BaseReaderController.php';
+    require_once __DIR__ . '/../BaseController.php';
 
     class HomeController extends BaseReaderController
     {
@@ -40,6 +40,13 @@
         public static function about()
         {
             $page = 'about';
+            $readerId = $_SESSION['reader']['reader_id'] ?? null;
+
+            // Hiển thị cảnh báo khi chưa đăng nhập nhưng nhấn nút thông báo
+            if ($readerId === null && isset($_GET['notification']) && $_GET['notification'] === 'login_required')
+            {
+                $_SESSION['warning'] = 'Vui lòng đăng nhập trước khi sử dụng chức năng này.';
+            }
 
             $navbarData = self::getNavbarData();
             $notifications = $navbarData['notifications'];
