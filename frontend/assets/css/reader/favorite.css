@@ -4,7 +4,7 @@ body {
 }
 
 .favorite-page {
-    min-width: calc(100vh - 205px);
+    width: calc(100% - 205px);
     margin-left: 205px;
     min-height: calc(100vh - 70px);
     padding: 30px 35px;
@@ -18,14 +18,26 @@ body {
 
 /* Header */
 .favorite-header {
-    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
 }
 
 .favorite-header h2 {
-    margin: 0 0 7.5px;
+    margin: 0;
     font-size: 30px;
-    font-weight: 700;
+    font-weight: bold;
     color: #222;
+}
+
+.favorite-count {
+    padding: 6px 12px;
+    border-radius: 15px;
+    background: #eaf1ff;
+    color: #3575e5;
+    font-size: 15px;
+    font-weight: bold;
 }
 
 .favorite-header h2 i {

@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/category_reader.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/category.css?v=1.0">
 </head>
 <body>
     <?php require_once 'navbar.php';?>
@@ -45,7 +45,7 @@
         <div class="category-grid">
             <?php if (!empty($categories)): ?>
                 <?php foreach ($categories as $category): ?>
-                    <a href="<?= BASE_URL ?>/index.php?page=book_reader&category_id[]=<?= (int)$category['category_id'] ?>" class="category-card">
+                    <a href="<?= BASE_URL ?>/index.php?page=book&category_id[]=<?= (int)$category['category_id'] ?>" class="category-card">
                         <!-- Icon -->
                         <div class="category-icon" style="background: <?= htmlspecialchars($category['icon_color'] ?? '#3974d5') ?>20;
                                                           color: <?= htmlspecialchars($category['icon_color'] ?? '#3974d5') ?>;">

@@ -1,4 +1,4 @@
-<!-- điều khiển trang sách của độc giả -->
+<!-- điều khiển trang sách, trang yêu thích, trang thể loại của độc giả -->
 <?php
     require_once __DIR__ . '/../BaseController.php';
 
@@ -97,7 +97,7 @@
             // Lấy danh sách năm
             $availableYears = Book::getPublishYears();
 
-            $page = 'book_reader';
+            $page = 'book';
 
             // Hiển thị cảnh báo khi chưa đăng nhập nhưng nhấn nút thông báo
             if ($readerId === null && isset($_GET['notification']) && $_GET['notification'] === 'login_required')
@@ -110,7 +110,7 @@
             $hasUnreadNotification = $navbarData['hasUnreadNotification'];
             $unreadNotificationCount = $navbarData['unreadNotificationCount'];
 
-            require_once __DIR__ . '/../../../../frontend/reader/book_reader.php';
+            require_once __DIR__ . '/../../../../frontend/reader/book.php';
         }
 
         // Thêm hoặc xóa sách yêu thích
@@ -128,22 +128,20 @@
 
             if ($bookId <= 0) {
                 $_SESSION['warning'] = 'Sách không hợp lệ.';
-                header("Location: " . BASE_URL . "/index.php?page=book_reader");
+                header("Location: " . BASE_URL . "/index.php?page=book");
                 exit;
             }
 
             // Nhận trang cần quay lại
-            $returnPage = $_POST['return_page'] ?? 'book_reader';
+            $returnPage = $_POST['return_page'] ?? 'book';
 
             // Đã yêu thích → bỏ yêu thích
             if (Favorite::exists($readerId, $bookId)) {
-
                 if (Favorite::remove($readerId, $bookId)) {
                     $_SESSION['success'] = 'Đã xóa sách khỏi danh sách yêu thích.';
                 }
 
             } else {
-
                 // Chưa yêu thích → thêm yêu thích
                 if (Favorite::add($readerId, $bookId)) {
                     $_SESSION['success'] = 'Đã thêm sách vào danh sách yêu thích.';
@@ -158,7 +156,7 @@
             } elseif ($returnPage === 'favorite') {
                 header("Location: " . BASE_URL . "/index.php?page=favorite");
             } else {
-                header("Location: " . BASE_URL . "/index.php?page=book_reader");
+                header("Location: " . BASE_URL . "/index.php?page=book");
             }
 
             exit;
@@ -194,7 +192,7 @@
         // Hiển thị trang thể loại sách
         public static function category()
         {
-            $page = 'category_reader';
+            $page = 'category';
             $readerId = $_SESSION['reader']['reader_id'] ?? null;
 
             // Hiển thị cảnh báo khi chưa đăng nhập nhưng nhấn nút thông báo
@@ -211,7 +209,7 @@
             // Lấy tất cả thể loại
             $categories = Category::getAllWithBookCount();
 
-            require_once __DIR__ . '/../../../../frontend/reader/category_reader.php';
+            require_once __DIR__ . '/../../../../frontend/reader/category.php';
         }
     }
 ?>

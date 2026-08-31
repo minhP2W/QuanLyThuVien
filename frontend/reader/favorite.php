@@ -36,9 +36,15 @@
     <main class="favorite-page">
         <div class="favorite-container">
             <div class="favorite-header">
-                <h2>
-                    Sách yêu thích
-                </h2>
+                <div>
+                    <h2>
+                        Sách yêu thích
+                    </h2>
+                </div>
+
+                <span class="favorite-count">
+                    <?= count($favoriteBooks) ?> sách
+                </span>
             </div>
 
             <?php if (empty($favoriteBooks)): ?>
@@ -91,7 +97,7 @@
     </main>
 
     <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/book_reader.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/book.js?v=1.0"></script>
 
     <?php require_once 'footer.php';?>
 </body>

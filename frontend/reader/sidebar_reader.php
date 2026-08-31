@@ -3,28 +3,24 @@
     <!-- Phần trên -->
     <ul class="reader-sidebar-menu">
         <li>
-            <a href="<?= BASE_URL ?>/index.php?page=home" class="<?= ($page ?? '') == 'home' ? 'active' : '' ?>">
-                <i class="bi bi-house"></i>
-                <span>Trang chủ</span>
-            </a>
-        </li>
-
-        <li>
-            <a href="#" class="reader-login-required">
+            <a href="<?= BASE_URL ?>/index.php?page=myBook" 
+               class="reader-login-required <?= ($page ?? '') == 'myBook' ? 'active' : '' ?>">
                 <i class="bi bi-book"></i>
                 <span>Sách của tôi</span>
             </a>
         </li>
 
         <li>
-            <a href="#" class="reader-login-required">
+            <a href="<?= BASE_URL ?>/index.php?page=borrowHistory" 
+               class="reader-login-required <?= ($page ?? '') == 'borrowHistory' ? 'active' : '' ?>">
                 <i class="bi bi-clock-history"></i>
                 <span>Lịch sử mượn</span>
             </a>
         </li>
 
         <li>
-            <a href="#" class="reader-login-required">
+            <a href="<?= BASE_URL ?>/index.php?page=reservation" 
+               class="reader-login-required <?= ($page ?? '') == 'reservation' ? 'active' : '' ?>">
                 <i class="bi bi-journal-plus"></i>
                 <span>Đặt trước</span>
             </a>
@@ -39,8 +35,8 @@
         </li>
 
         <li>
-            <a href="<?= BASE_URL ?>/index.php?page=notification" 
-               class="reader-login-required <?= ($page ?? '') == 'notification' ? 'active' : '' ?>">
+            <a href="<?= BASE_URL ?>/index.php?page=notification_reader" 
+               class="reader-login-required <?= ($page ?? '') == 'notification_reader' ? 'active' : '' ?>">
                 <i class="bi bi-bell"></i>
                 <span>Thông báo</span>
 

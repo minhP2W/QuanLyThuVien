@@ -1,0 +1,260 @@
+/* CSS trang lịch sử mượn cho độc giả */
+body {
+    overflow-x: hidden;
+}
+
+.history-page {
+    width: calc(100% - 205px);
+    margin-left: 205px;
+    min-height: calc(100vh - 70px);
+    padding: 30px 35px;
+    box-sizing: border-box;
+    background: #f8f9fa;
+}
+
+.history-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Header */
+.history-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.history-header h2 {
+    margin: 0;
+    color: #222;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.history-header p {
+    margin: 7px 0 0;
+    color: #777;
+    font-size: 15px;
+}
+
+.history-count {
+    padding: 6px 12px;
+    border-radius: 15px;
+    background: #eaf1ff;
+    color: #3575e5;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Danh sách */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* Phiếu */
+.history-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+}
+
+.history-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+}
+
+/* Header phiếu */
+.history-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 18px;
+    border-bottom: 1px solid #edf0f3;
+}
+
+.borrow-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #222;
+    font-size: 15px;
+}
+
+.borrow-title i {
+    color: #3575e5;
+    font-size: 17px;
+}
+
+.returned-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: #e8f7ee;
+    color: #198754;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.borrowing-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: #eaf1ff;
+    color: #3575e5;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Trạng thái quá hạn */
+.overdue-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: #fff4e5;
+    color: #e67e22;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Trạng thái mất sách */
+.lost-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 10px;
+    border-radius: 12px;
+    background: #fdeaea;
+    color: #dc3545;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+/* Thông tin */
+.history-info {
+    padding: 12px 18px;
+}
+
+.history-row {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    align-items: center;
+    gap: 15px;
+    padding: 7px 0;
+    font-size: 13px;
+}
+
+.history-row > span {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #777;
+}
+
+.history-row > span i {
+    color: #3575e5;
+    font-size: 13px;
+}
+
+.history-row strong {
+    color: #222;
+    font-weight: 500;
+}
+
+.borrow-books {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.borrow-book {
+    padding: 7px 10px;
+    background: #fafbfe;
+    border-left: 3px solid #3575e5;
+    border-radius: 5px;
+}
+
+.borrow-book-info h4 {
+    margin: 0 0 2px;
+    color: #333;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.5;
+}
+
+.borrow-book-info p {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0 10px 0 0;
+    color: #777;
+    font-size: 11px;
+}
+
+.borrow-book-info p i {
+    color: #3575e5;
+    font-size: 10px;
+}
+
+/* Không có dữ liệu */
+.empty-history {
+    min-height: calc(100vh - 225px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    box-sizing: border-box;
+    background: #fff;
+    border: 1px solid #e9ecef;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.empty-history > i {
+    margin-bottom: 15px;
+    color: #adb5bd;
+    font-size: 55px;
+}
+
+.empty-history h3 {
+    margin: 0 0 8px;
+    color: #343a40;
+    font-size: 21px;
+}
+
+.empty-history p {
+    margin: 0 0 20px;
+    color: #6c757d;
+    font-size: 14px;
+}
+
+.empty-history a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 10px 18px;
+    border-radius: 7px;
+    background: #3575e5;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: background 0.25s ease;
+}
+
+.empty-history a:hover {
+    background: #2864d0;
+}

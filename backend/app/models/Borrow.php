@@ -127,9 +127,7 @@
                     INNER JOIN users u
                         ON bs.staff_id = u.user_id
                     GROUP BY bs.borrow_id, r.reader_code, r.full_name, bs.borrow_date, bs.due_date, u.full_name, bs.status
-                    ORDER BY
-                        bs.borrow_date DESC,
-                        bs.borrow_id DESC
+                    ORDER BY bs.borrow_date DESC, bs.borrow_id DESC
                     LIMIT ?";
 
             $stmt = $conn->prepare($sql);
@@ -137,6 +135,80 @@
             $stmt->execute();
 
             return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        // Lấy sách đang mượn của độc giả
+        public function getMyBorrowedBooks($readerId)
+        {
+            global $conn;
+
+            $sql = "SELECT bd.detail_id, bd.borrow_id, bd.book_id, bd.quantity, b.title, b.cover_image, a.author_name, bs.borrow_date,
+                           bs.due_date, bs.status
+                FROM borrow_details bd
+                INNER JOIN borrow_slips bs
+                    ON bd.borrow_id = bs.borrow_id
+                INNER JOIN books b
+                    ON bd.book_id = b.book_id
+                LEFT JOIN authors a
+                    ON b.author_id = a.author_id
+                WHERE bs.reader_id = ?
+                AND bs.status IN ('Borrowing', 'Overdue', 'Lost')
+                ORDER BY bs.due_date ASC";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $readerId);
+            $stmt->execute();
+
+            return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+        }
+
+        // Lấy lịch sử mượn của độc giả
+        public function getBorrowHistory($readerId)
+        {
+            global $conn;
+
+            $sql = "SELECT bs.borrow_id, bs.borrow_date, bs.due_date, bs.status, b.book_id, b.title, b.publish_year, a.author_name
+                    FROM borrow_slips bs
+                    INNER JOIN borrow_details bd
+                        ON bs.borrow_id = bd.borrow_id
+                    INNER JOIN books b
+                        ON bd.book_id = b.book_id
+                    LEFT JOIN authors a
+                        ON b.author_id = a.author_id
+                    WHERE bs.reader_id = ?
+                    ORDER BY bs.borrow_date DESC, bs.borrow_id DESC";
+
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("i", $readerId);
+            $stmt->execute();
+
+            $rows = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+
+            // Gom sách theo phiếu mượn
+            $history = [];
+
+            foreach ($rows as $row) {
+                $borrowId = $row['borrow_id'];
+
+                if (!isset($history[$borrowId])) {
+                    $history[$borrowId] = [
+                        'borrow_id'   => $row['borrow_id'],
+                        'borrow_date' => $row['borrow_date'],
+                        'due_date'    => $row['due_date'],
+                        'status'      => $row['status'],
+                        'books'       => []
+                    ];
+                }
+
+                $history[$borrowId]['books'][] = [
+                    'book_id'     => $row['book_id'],
+                    'title'       => $row['title'],
+                    'author_name' => $row['author_name'],
+                    'publish_year'=> $row['publish_year']
+                ];
+            }
+
+            return array_values($history);
         }
     }
 ?>

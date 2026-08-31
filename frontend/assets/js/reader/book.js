@@ -25,7 +25,7 @@ document.querySelectorAll(".reader-login-required").forEach(button => {
 
         // Đã đăng nhập
         const bookId = this.dataset.bookId;
-        const returnPage = this.dataset.returnPage || "book_reader";
+        const returnPage = this.dataset.returnPage || "book";
 
         // Lưu URL hiện tại + vị trí cuộn
         sessionStorage.setItem("favoriteReturnUrl", window.location.href);

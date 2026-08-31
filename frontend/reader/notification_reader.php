@@ -10,7 +10,7 @@
 
     <link rel="icon" href="<?= BASE_URL ?>/frontend/assets/images/icon.png">
 
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/notification.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/notification_reader.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/navbar.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer.css?v=1.0">
@@ -31,15 +31,15 @@
 
             <!-- Bộ lọc -->
             <div class="notification-filter">
-                <a href="<?= BASE_URL ?>/index.php?page=notification&status=all" class="<?= $status === 'all' ? 'active' : '' ?>">
+                <a href="<?= BASE_URL ?>/index.php?page=notification_reader&status=all" class="<?= $status === 'all' ? 'active' : '' ?>">
                     Tất cả
                 </a>
 
-                <a href="<?= BASE_URL ?>/index.php?page=notification&status=unread" class="<?= $status === 'unread' ? 'active' : '' ?>">
+                <a href="<?= BASE_URL ?>/index.php?page=notification_reader&status=unread" class="<?= $status === 'unread' ? 'active' : '' ?>">
                     Chưa đọc
                 </a>
 
-                <a href="<?= BASE_URL ?>/index.php?page=notification&status=read" class="<?= $status === 'read' ? 'active' : '' ?>">
+                <a href="<?= BASE_URL ?>/index.php?page=notification_reader&status=read" class="<?= $status === 'read' ? 'active' : '' ?>">
                     Đã đọc
                 </a>
             </div>
@@ -76,7 +76,6 @@
                         <!-- Trạng thái -->
                         <div class="notification-status">
                             <?php if ((int)$notification['is_read'] === 0): ?>
-
                                 <span class="unread-label">
                                     Chưa đọc
                                 </span>

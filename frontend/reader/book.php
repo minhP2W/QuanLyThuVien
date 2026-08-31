@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/sidebar_reader.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/footer.css?v=1.0">
     <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/alert.css?v=1.0">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/book_reader.css?v=1.0">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/frontend/assets/css/reader/book.css?v=1.0">
 </head>
 <body data-logged-in="<?= isset($_SESSION['reader']) ? 'true' : 'false' ?>" data-base-url="<?= BASE_URL ?>">
     <?php require_once 'navbar.php';?>
@@ -73,7 +73,7 @@
                 </div>
 
                 <form method="GET" action="<?= BASE_URL ?>/index.php" class="filter-form">
-                    <input type="hidden" name="page" value="book_reader">
+                    <input type="hidden" name="page" value="book">
 
                     <!-- Từ khóa -->
                     <div class="filter-group">
@@ -169,7 +169,7 @@
                     </button>
 
                     <!-- Xóa -->
-                    <a href="<?= BASE_URL ?>/index.php?page=book_reader" class="filter-reset">
+                    <a href="<?= BASE_URL ?>/index.php?page=book" class="filter-reset">
                         Xóa bộ lọc
                     </a>
                 </form>
@@ -183,7 +183,7 @@
                             <div class="book-card">
                                 <button type="button"
                                         class="favorite-btn reader-login-required <?= !empty($book['favorite_id']) ? 'active' : '' ?>"
-                                        data-book-id="<?= $book['book_id'] ?>" data-return-page="book_reader">
+                                        data-book-id="<?= $book['book_id'] ?>" data-return-page="book">
                                     <i class="bi <?= !empty($book['favorite_id']) ? 'bi-heart-fill' : 'bi-heart' ?>"></i>
                                 </button>
 
@@ -239,7 +239,7 @@
                     
                     <?php
                         $paginationParams = [
-                            'page' => 'book_reader',
+                            'page' => 'book',
                             'keyword' => $keyword,
                             'category_id' => $categoryIds,
                             'publish_year' => $publishYears,
@@ -316,7 +316,7 @@
                             Không tìm thấy sách phù hợp với bộ lọc.
                         </p>
 
-                        <a href="<?= BASE_URL ?>/index.php?page=book_reader">
+                        <a href="<?= BASE_URL ?>/index.php?page=book">
                             Xem tất cả sách
                         </a>
                     </div>
@@ -325,7 +325,7 @@
         </div>
     </main>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/book_reader.js?v=1.0"></script>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/reader/book.js?v=1.0"></script>
 
     <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
     <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>

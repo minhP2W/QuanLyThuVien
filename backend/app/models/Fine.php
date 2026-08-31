@@ -10,14 +10,17 @@
         {
             global $conn;
 
-            $sql = "SELECT COALESCE(SUM(fine), 0) AS total_fine,
+            $sql = "SELECT
+                        COALESCE(SUM(fine), 0) AS total_fine,
+
                         COALESCE(SUM(
                             CASE
-                                WHEN overdue_days > 0
+                                WHEN condition_status = 'Lost'
                                 THEN fine
                                 ELSE 0
                             END
-                        ), 0) AS overdue_fine,
+                        ), 0) AS lost_fine,
+
                         COALESCE(SUM(
                             CASE
                                 WHEN condition_status = 'Damaged'
@@ -25,13 +28,16 @@
                                 ELSE 0
                             END
                         ), 0) AS damaged_fine,
+
                         COALESCE(SUM(
                             CASE
-                                WHEN condition_status = 'Lost'
+                                WHEN condition_status = 'Normal'
+                                AND overdue_days > 0
                                 THEN fine
                                 ELSE 0
                             END
-                        ), 0) AS lost_fine
+                        ), 0) AS overdue_fine
+
                     FROM fines";
 
             $result = $conn->query($sql);
@@ -45,14 +51,22 @@
             global $conn;
 
             $sql = "SELECT
-                        COUNT(CASE
-                            WHEN condition_status = 'Damaged'
-                            THEN 1
-                        END) AS damaged_count,
-                        COUNT(CASE
-                            WHEN condition_status = 'Lost'
-                            THEN 1
-                        END) AS lost_count
+                        COALESCE(SUM(
+                            CASE
+                                WHEN condition_status = 'Damaged'
+                                THEN 1
+                                ELSE 0
+                            END
+                        ), 0) AS damaged_count,
+
+                        COALESCE(SUM(
+                            CASE
+                                WHEN condition_status = 'Lost'
+                                THEN 1
+                                ELSE 0
+                            END
+                        ), 0) AS lost_count
+
                     FROM fines";
 
             $result = $conn->query($sql);

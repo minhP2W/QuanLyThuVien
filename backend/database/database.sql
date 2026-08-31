@@ -119,7 +119,7 @@ CREATE TABLE `borrow_slips` (
     `staff_id` INT NOT NULL,                               -- Mã thủ thư lập phiếu
     `borrow_date` DATE NOT NULL,                           -- Ngày mượn
     `due_date` DATE NOT NULL,                              -- Hạn trả
-    `status` ENUM('Borrowing','Returned') 
+    `status` ENUM('Borrowing','Overdue','Lost','Returned') 
              DEFAULT 'Borrowing',                          -- Trạng thái phiếu
 
     CONSTRAINT `fk_borrow_reader`
@@ -176,11 +176,22 @@ CREATE TABLE `return_slips` (
 -- =========================
 CREATE TABLE `fines` (
     `fine_id` INT AUTO_INCREMENT PRIMARY KEY,              -- Mã tiền phạt
+    `borrow_id` INT NOT NULL,
+    `reader_id` INT NOT NULL,
+    `payment_status` ENUM('Unpaid','Paid') DEFAULT 'Unpaid',
     `overdue_days` INT NOT NULL DEFAULT 0,                 -- Số ngày trả quá hạn
     `condition_status` ENUM('Normal','Damaged','Lost')
                      DEFAULT 'Normal' NOT NULL,            -- Tình trạng sách
     `damage_note` TEXT,                                    -- Ghi chú thiệt hại
-    `fine` DECIMAL(12,0) NOT NULL DEFAULT 0                -- Tiền phạt
+    `fine` DECIMAL(12,0) NOT NULL DEFAULT 0,               -- Tiền phạt
+
+    CONSTRAINT `fk_fine_borrow`
+        FOREIGN KEY (`borrow_id`)
+        REFERENCES `borrow_slips`(`borrow_id`),
+
+    CONSTRAINT `fk_fine_reader`
+        FOREIGN KEY (`reader_id`)
+        REFERENCES `readers`(`reader_id`)
 );
 
 -- =========================
@@ -191,7 +202,6 @@ CREATE TABLE `return_details` (
     `return_id` INT NOT NULL,                              -- Mã phiếu trả
     `book_id` INT NOT NULL,                                -- Mã sách
     `quantity` INT DEFAULT 1,                              -- Số lượng trả
-    `fine_id` INT UNIQUE,                                  -- Mã tiền phạt
 
     UNIQUE (`return_id`, `book_id`),
 
@@ -201,11 +211,7 @@ CREATE TABLE `return_details` (
 
     CONSTRAINT `fk_return_book`
         FOREIGN KEY (`book_id`)
-        REFERENCES `books`(`book_id`),
-
-    CONSTRAINT `fk_return_fine`
-        FOREIGN KEY (`fine_id`)
-        REFERENCES `fines`(`fine_id`)
+        REFERENCES `books`(`book_id`)
 );
 
 -- =========================
@@ -585,21 +591,23 @@ VALUES
 INSERT INTO `borrow_slips`
 (`reader_id`, `staff_id`, `borrow_date`, `due_date`, `status`)
 VALUES
-(1,2,'2026-07-01','2026-07-15','Returned'),
-(2,2,'2026-07-03','2026-07-17','Returned'),
-(3,3,'2026-07-05','2026-07-19','Returned'),
-(4,3,'2026-07-08','2026-07-22','Returned'),
-(5,4,'2026-07-10','2026-07-24','Returned'),
-(6,2,'2026-07-12','2026-07-26','Returned'),
-(7,3,'2026-07-15','2026-07-29','Returned'),
-(8,4,'2026-07-18','2026-08-01','Returned'),
-(9,2,'2026-07-20','2026-08-03','Returned'),
-(10,3,'2026-07-22','2026-08-05','Returned'),
-(11,4,'2026-07-25','2026-08-08','Borrowing'),
-(12,2,'2026-07-27','2026-08-10','Borrowing'),
-(13,3,'2026-07-30','2026-08-13','Borrowing'),
-(14,4,'2026-08-01','2026-08-15','Borrowing'),
-(15,2,'2026-08-03','2026-08-17','Borrowing');
+(1, 2, '2026-08-01', '2026-08-15', 'Returned'),
+(2, 2, '2026-08-03', '2026-08-17', 'Returned'),
+(3, 3, '2026-08-05', '2026-08-19', 'Returned'),
+(4, 3, '2026-08-08', '2026-08-22', 'Returned'),
+(5, 4, '2026-08-10', '2026-08-24', 'Returned'),
+
+(6, 2, '2026-08-12', '2026-08-26', 'Returned'),
+(7, 3, '2026-08-15', '2026-08-29', 'Returned'),
+(8, 4, '2026-08-18', '2026-09-01', 'Returned'),
+(9, 2, '2026-08-20', '2026-09-03', 'Returned'),
+(10, 3, '2026-08-22', '2026-09-05', 'Returned'),
+
+(11, 4, '2026-07-20', '2026-08-03', 'Overdue'),
+(12, 2, '2026-07-22', '2026-08-05', 'Overdue'),
+(13, 3, '2026-07-25', '2026-08-08', 'Lost'),
+(14, 4, '2026-08-01', '2026-08-15', 'Returned'),
+(15, 2, '2026-08-05', '2026-08-19', 'Returned');
 
 -- =====================================
 -- BORROW_DETAILS (30 chi tiết)
@@ -677,69 +685,66 @@ VALUES
 -- =====================================
 
 INSERT INTO `fines`
-(`overdue_days`, `condition_status`, `damage_note`, `fine`)
+(`borrow_id`, `reader_id`, `payment_status`, `overdue_days`,
+ `condition_status`, `damage_note`, `fine`)
 VALUES
-(1, 'Normal', NULL, 5000),
-(1, 'Normal', NULL, 5000),
+(2, 2, 'Paid', 1, 'Normal', NULL, 5000),
 
-(3, 'Normal', NULL, 15000),
-(3, 'Normal', NULL, 15000),
+(4, 4, 'Unpaid', 3, 'Normal', NULL, 15000),
 
-(0, 'Damaged', 'Bìa sách bị rách', 30000),
-(0, 'Damaged', 'Trang sách bị nhàu', 20000),
+(6, 6, 'Paid', 0, 'Damaged', 'Bìa sách bị rách', 30000),
 
-(0, 'Lost', 'Độc giả làm mất sách', 180000),
+(11, 11, 'Unpaid', 10, 'Normal', NULL, 50000),
 
-(1, 'Normal', NULL, 5000),
-(1, 'Normal', NULL, 5000);
+(12, 12, 'Unpaid', 8, 'Damaged', 'Một số trang sách bị nhàu', 30000),
+
+(13, 13, 'Unpaid', 0, 'Lost', 'Độc giả làm mất sách', 180000),
+
+(14, 14, 'Paid', 2, 'Normal', NULL, 10000),
+
+(15, 15, 'Unpaid', 0, 'Damaged', 'Bìa sách bị cong và trầy xước', 20000);
 
 -- =====================================
 -- RETURN_DETAILS (20 chi tiết)
 -- =====================================
 
 INSERT INTO `return_details`
-(`return_id`, `book_id`, `quantity`, `fine_id`)
+(`return_id`, `book_id`, `quantity`)
 VALUES
+-- Phiếu trả 1
+(1, 1, 1),
+(1, 11, 1),
 
--- Return 1
-(1,1,1,NULL),
-(1,11,1,NULL),
+-- Phiếu trả 2
+(2, 2, 1),
+(2, 17, 1),
 
--- Return 2
-(2,2,1,1),
-(2,17,1,2),
+-- Phiếu trả 3
+(3, 7, 1),
 
--- Return 3
-(3,7,1,NULL),
-(3,21,1,NULL),
+-- Phiếu trả 4
+(4, 14, 1),
+(4, 29, 1),
 
--- Return 4
-(4,14,1,3),
-(4,29,1,4),
+-- Phiếu trả 5
+(5, 18, 1),
 
--- Return 5
-(5,18,1,NULL),
-(5,31,1,NULL),
+-- Phiếu trả 6
+(6, 21, 1),
+(6, 36, 1),
 
--- Return 6
-(6,9,1,5),
-(6,36,1,6),
+-- Phiếu trả 7
+(7, 24, 1),
 
--- Return 7
-(7,10,1,NULL),
-(7,37,1,NULL),
+-- Phiếu trả 8
+(8, 38, 1),
+(8, 39, 1),
 
--- Return 8
-(8,24,1,7),
-(8,38,1,8),
+-- Phiếu trả 9
+(9, 40, 1),
 
--- Return 9
-(9,25,1,9),
-(9,39,1,10),
-
--- Return 10
-(10,30,1,NULL),
-(10,40,1,NULL);
+-- Phiếu trả 10
+(10, 42, 1);
 
 -- =====================================
 -- 11. NOTIFICATIONS

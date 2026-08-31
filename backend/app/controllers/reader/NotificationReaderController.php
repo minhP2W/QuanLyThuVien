@@ -6,7 +6,7 @@
 
     require_once __DIR__ . '/../../models/Notification.php';
 
-    class NotificationController extends BaseReaderController
+    class NotificationReaderController extends BaseReaderController
     {
         // Trang thông báo của độc giả
         public static function notification()
@@ -43,7 +43,7 @@
                 );
             }
 
-            require __DIR__ . '/../../../../frontend/reader/notification.php';
+            require __DIR__ . '/../../../../frontend/reader/notification_reader.php';
         }
     }
 ?>

@@ -16,6 +16,7 @@
 </head>
 <body>
     <?php require_once 'sidebar_admin.php';?>
+    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
 
     <!-- Hiển thị thông báo đăng nhập thành công -->
     <?php if (isset($_SESSION['success'])): ?>
@@ -171,7 +172,7 @@
 
                 <div class="task-list">
                     <!-- Quá hạn -->
-                    <a href="<?= BASE_URL ?>/index.php?page=borrow" class="task-item">
+                    <a href="<?= BASE_URL ?>/index.php?page=borrow_admin" class="task-item">
                         <div class="task-icon danger">
                             <i class="bi bi-clock-history"></i>
                         </div>
@@ -188,7 +189,7 @@
                     </a>
 
                     <!-- Đặt trước -->
-                    <a href="<?= BASE_URL ?>/index.php?page=reservation" class="task-item">
+                    <a href="<?= BASE_URL ?>/index.php?page=borrow_admin" class="task-item">
                         <div class="task-icon warning">
                             <i class="bi bi-bookmark"></i>
                         </div>
@@ -205,7 +206,7 @@
                     </a>
 
                     <!-- Hết sách -->
-                    <a href="<?= BASE_URL ?>/index.php?page=books" class="task-item">
+                    <a href="<?= BASE_URL ?>/index.php?page=manageBook" class="task-item">
                         <div class="task-icon blue">
                             <i class="bi bi-box-seam"></i>
                         </div>
@@ -222,7 +223,7 @@
                     </a>
 
                     <!-- Sách hỏng -->
-                    <a href="<?= BASE_URL ?>/index.php?page=return" class="task-item">
+                    <a href="<?= BASE_URL ?>/index.php?page=return_admin" class="task-item">
                         <div class="task-icon orange">
                             <i class="bi bi-exclamation-triangle"></i>
                         </div>
@@ -239,7 +240,7 @@
                     </a>
 
                     <!-- Sách mất -->
-                    <a href="<?= BASE_URL ?>/index.php?page=return" class="task-item">
+                    <a href="<?= BASE_URL ?>/index.php?page=return_admin" class="task-item">
                         <div class="task-icon red">
                             <i class="bi bi-x-circle"></i>
                         </div>
@@ -269,7 +270,7 @@
                         <p>Top 5 đầu sách có lượt mượn cao nhất</p>
                     </div>
 
-                    <a href="<?= BASE_URL ?>/index.php?page=books">
+                    <a href="<?= BASE_URL ?>/index.php?page=manageBook">
                         Xem tất cả
                     </a>
                 </div>
@@ -394,7 +395,7 @@
                     <p>Các phiếu mượn mới nhất trong hệ thống</p>
                 </div>
 
-                <a href="<?= BASE_URL ?>/index.php?page=borrow">
+                <a href="<?= BASE_URL ?>/index.php?page=borrow_admin">
                     Xem tất cả
                 </a>
             </div>
@@ -431,7 +432,6 @@
 
                                     <td>
                                         <div class="reader-cell">
-
                                             <div class="reader-avatar">
                                                 <?= strtoupper(
                                                     mb_substr(
@@ -541,22 +541,22 @@
 
                     <div class="rating-bars">
                         <?php
-                        $ratings = [
-                            5 => $reviewStatistics['five_star'] ?? 0,
-                            4 => $reviewStatistics['four_star'] ?? 0,
-                            3 => $reviewStatistics['three_star'] ?? 0,
-                            2 => $reviewStatistics['two_star'] ?? 0,
-                            1 => $reviewStatistics['one_star'] ?? 0
-                        ];
+                            $ratings = [
+                                5 => $reviewStatistics['five_star'] ?? 0,
+                                4 => $reviewStatistics['four_star'] ?? 0,
+                                3 => $reviewStatistics['three_star'] ?? 0,
+                                2 => $reviewStatistics['two_star'] ?? 0,
+                                1 => $reviewStatistics['one_star'] ?? 0
+                            ];
 
-                        $totalReviews = (int)($reviewStatistics['total_reviews'] ?? 0);
+                            $totalReviews = (int)($reviewStatistics['total_reviews'] ?? 0);
                         ?>
 
                         <?php foreach ($ratings as $star => $count): ?>
                             <?php
-                            $percent = $totalReviews > 0
-                                ? round(($count / $totalReviews) * 100)
-                                : 0;
+                                $percent = $totalReviews > 0
+                                    ? round(($count / $totalReviews) * 100)
+                                    : 0;
                             ?>
 
                             <div class="rating-row">
@@ -646,7 +646,6 @@
         const borrowReturnData = <?= json_encode($borrowReturnStatistics, JSON_UNESCAPED_UNICODE) ?>;
     </script>
 
-    <script src="<?= BASE_URL ?>/frontend/assets/js/sidebar.js?v=1.0"></script>
     <script src="<?= BASE_URL ?>/frontend/assets/js/admin/dashboard.js?v=1.0"></script>
     <script src="<?= BASE_URL ?>/frontend/assets/js/alert.js?v=1.0"></script>
 </body>

@@ -24,26 +24,18 @@
             </li>
 
             <li>
-                <a href="<?= BASE_URL ?>/index.php?page=book_reader" 
-                   class="reader-login-required <?= ($page ?? '') == 'book_reader' ? 'active' : '' ?>">
+                <a href="<?= BASE_URL ?>/index.php?page=book" 
+                   class="reader-login-required <?= ($page ?? '') == 'book' ? 'active' : '' ?>">
                     <i class="bi bi-book"></i>
                     <span>Sách</span>
                 </a>
             </li>
 
             <li>
-                <a href="<?= BASE_URL ?>/index.php?page=category_reader" 
-                   class="reader-login-required <?= ($page ?? '') == 'category_reader' ? 'active' : '' ?>">
+                <a href="<?= BASE_URL ?>/index.php?page=category" 
+                   class="reader-login-required <?= ($page ?? '') == 'category' ? 'active' : '' ?>">
                     <i class="bi bi-grid"></i>
                     <span>Thể loại</span>
-                </a>
-            </li>
-
-            <li>
-                <a href="<?= BASE_URL ?>/index.php?page=notification" 
-                   class="reader-login-required <?= ($page ?? '') == 'notification' ? 'active' : '' ?>">
-                    <i class="bi bi-bell"></i>
-                    <span>Thông báo</span>
                 </a>
             </li>
 
@@ -116,7 +108,7 @@
                 <!-- Xem tất cả -->
                 <?php if ($isReaderLoggedIn): ?>
                     <div class="notification-view-all">
-                        <a href="<?= BASE_URL ?>/index.php?page=notification">
+                        <a href="<?= BASE_URL ?>/index.php?page=notification_reader">
                             Xem tất cả
                         </a>
                     </div>

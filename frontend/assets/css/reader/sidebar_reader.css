@@ -34,7 +34,7 @@ body {
 .reader-sidebar-menu a{
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 10.8px;
     padding: 12px 14px;
     border-radius: 10px;
     text-decoration: none;

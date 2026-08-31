@@ -99,7 +99,7 @@
             <div class="section-header">
                 <h2>Sách mới</h2>
 
-                <a href="<?= BASE_URL ?>/index.php?page=book_reader">
+                <a href="<?= BASE_URL ?>/index.php?page=book">
                     Xem tất cả →
                 </a>
             </div>
@@ -151,7 +151,7 @@
             <div class="section-header">
                 <h2>Sách nổi bật</h2>
 
-                <a href="<?= BASE_URL ?>/index.php?page=book_reader">
+                <a href="<?= BASE_URL ?>/index.php?page=book">
                     Xem tất cả →
                 </a>
             </div>
@@ -206,7 +206,7 @@
             <div class="section-header">
                 <h2>Thể loại</h2>
 
-                <a href="<?= BASE_URL ?>/index.php?page=category_reader">
+                <a href="<?= BASE_URL ?>/index.php?page=category">
                     Xem tất cả →
                 </a>
             </div>
@@ -214,8 +214,8 @@
             <div class="category-grid">
                 <?php if (!empty($categories)): ?>
                     <?php foreach ($categories as $category): ?>
-                        <a href="<?= BASE_URL ?>/index.php?page=book_reader&category=<?= $category['category_id'] ?>"
-                        class="category-card">
+                        <a href="<?= BASE_URL ?>/index.php?page=book&category_id[]=<?= (int)$category['category_id'] ?>"
+                           class="category-card">
                             <div class="category-icon" style="background: <?= htmlspecialchars($category['icon_color']) ?>20;
                                                               color: <?= htmlspecialchars($category['icon_color']) ?>;">
                                 <i class="bi <?= htmlspecialchars($category['icon']) ?>"></i>

@@ -7,17 +7,32 @@
     // errors
     require_once __DIR__ . '/controllers/ErrorController.php';
 
+    // models
+    require_once __DIR__ . '/models/Notification.php';
+
     // admin_controllers
     require_once __DIR__ . '/controllers/admin/AdminAuthController.php';
     require_once __DIR__ . '/controllers/admin/DashboardController.php';
     require_once __DIR__ . '/controllers/admin/AdminProfileController.php';
+    require_once __DIR__ . '/controllers/admin/ReaderController.php';
+
+    require_once __DIR__ . '/controllers/admin/CatalogAdminController.php';
+    require_once __DIR__ . '/controllers/admin/StaffAdminController.php';
+    require_once __DIR__ . '/controllers/admin/StatisticController.php';
+
+    require_once __DIR__ . '/controllers/admin/BookAdminController.php';
+    require_once __DIR__ . '/controllers/admin/BorrowAdminController.php';
+    require_once __DIR__ . '/controllers/admin/ReturnAdminController.php';
+    require_once __DIR__ . '/controllers/admin/NotificationAdminController.php';
 
     // reader_controllers
     require_once __DIR__ . '/controllers/reader/ReaderAuthController.php';
     require_once __DIR__ . '/controllers/reader/HomeController.php';
     require_once __DIR__ . '/controllers/reader/ReaderProfileController.php';
-    require_once __DIR__ . '/controllers/reader/NotificationController.php';
+    require_once __DIR__ . '/controllers/reader/NotificationReaderController.php';
     require_once __DIR__ . '/controllers/reader/BookReaderController.php';
+    require_once __DIR__ . '/controllers/reader/BorrowReaderController.php';
+    require_once __DIR__ . '/controllers/reader/ReservationController.php';
 
     // "bộ điều hướng" website
     $page = $_GET['page'] ?? 'home';
@@ -33,7 +48,7 @@
     $_SESSION['current_page'] = $page;
 
     switch ($page) {
-        // Admin + Staff
+        // Admin + Thủ thư
         case 'login_admin':
             AdminAuthController::login();
             break;
@@ -62,6 +77,50 @@
             AuthMiddleware::admin();
             RoleMiddleware::check(['admin', 'staff']);
             AdminProfileController::profile();
+            break;
+
+        case 'manageReader':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['admin', 'staff']);
+            ReaderController::manageReader();
+            break;
+
+        // Admin
+        case 'manageStaff':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['admin']);
+            StaffAdminController::manageStaff();
+            break;
+
+        case 'manageCatalog':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['admin']);
+            CatalogAdminController::manageCatalog();
+            break;
+
+        // Thủ thư
+        case 'manageBook':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['staff']);
+            BookAdminController::manageBook();
+            break;
+
+        case 'borrow_admin':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['staff']);
+            BorrowAdminController::borrow_admin();
+            break;
+
+        case 'return_admin':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['staff']);
+            ReturnAdminController::return_admin();
+            break;
+
+        case 'notification_admin':
+            AuthMiddleware::admin();
+            RoleMiddleware::check(['staff']);
+            NotificationAdminController::notification();
             break;
 
         // Reader
@@ -99,12 +158,12 @@
             ReaderProfileController::changePassword();
             break;
 
-        case 'notification':
+        case 'notification_reader':
             AuthMiddleware::reader();
-            NotificationController::notification();
+            NotificationReaderController::notification();
             break;
 
-        case 'book_reader':
+        case 'book':
             BookReaderController::book();
             break;
 
@@ -117,8 +176,23 @@
             BookReaderController::toggleFavorite();
             break;
 
-        case 'category_reader':
+        case 'category':
             BookReaderController::category();
+            break;
+
+        case 'myBook':
+            AuthMiddleware::reader();
+            BorrowReaderController::myBook();
+            break;
+
+        case 'borrowHistory':
+            AuthMiddleware::reader();
+            BorrowReaderController::borrowHistory();
+            break;
+        
+        case 'reservation':
+            AuthMiddleware::reader();
+            ReservationController::reservation();
             break;
 
         // Error

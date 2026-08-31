@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Librio - Lỗi 403: Không có quyền truy cập</title>
+    <title>Lỗi 403: Không có quyền truy cập - Librio</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
@@ -22,9 +22,19 @@
             Bạn không có quyền truy cập vào trang này.
         </p>
 
-        <a href="<?= BASE_URL ?>/index.php?page=home" class="btn-back">
+        <?php
+            if (isset($_SESSION['admin'])) {
+                $backUrl = BASE_URL . '/index.php?page=dashboard';
+                $backText = 'Quay về trang quản trị';
+            } else {
+                $backUrl = BASE_URL . '/index.php?page=home';
+                $backText = 'Quay về trang chủ';
+            }
+        ?>
+
+        <a href="<?= $backUrl ?>" class="btn-back">
             <i class="bi bi-house-door-fill"></i>
-            Quay về trang chủ
+            <?= $backText ?>
         </a>
     </div>
 </body>

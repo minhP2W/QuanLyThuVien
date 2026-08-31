@@ -34,7 +34,7 @@
             </li>
 
             <li>
-                <a href="#">
+                <a href="<?= BASE_URL ?>/index.php?page=manageReader" class="<?= ($page ?? '') == 'manageReader' ? 'active' : '' ?>">
                     <i class="bi bi-people"></i>
                     <span>Quản lý độc giả</span>
                 </a>
@@ -43,35 +43,21 @@
             <!-- chức năng của admin -->
             <?php if ($_SESSION['admin']['role'] === 'admin'): ?>
                 <li>
-                    <a href="#">
+                    <a href="<?= BASE_URL ?>/index.php?page=manageStaff" class="<?= ($page ?? '') == 'manageStaff' ? 'active' : '' ?>">
                         <i class="bi bi-person-badge"></i>
                         <span>Quản lý thủ thư</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <i class="bi bi-person"></i>
-                        <span>Tác giả</span>
+                    <a href="<?= BASE_URL ?>/index.php?page=manageCatalog" class="<?= ($page ?? '') == 'manageCatalog' ? 'active' : '' ?>">
+                        <i class="bi bi-collection"></i>
+                        <span>Danh mục sách</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <i class="bi bi-tags"></i>
-                        <span>Thể loại</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
-                        <i class="bi bi-building"></i>
-                        <span>Nhà xuất bản</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
+                    <a href="<?= BASE_URL ?>/index.php?page=statistic" class="<?= ($page ?? '') == 'statistic' ? 'active' : '' ?>">
                         <i class="bi bi-bar-chart"></i>
                         <span>Thống kê</span>
                     </a>
@@ -80,35 +66,28 @@
             <!-- chức năng của thủ thư -->
             <?php else: ?>
                 <li>
-                    <a href="#">
+                    <a href="<?= BASE_URL ?>/index.php?page=manageBook" class="<?= ($page ?? '') == 'manageBook' ? 'active' : '' ?>">
                         <i class="bi bi-book"></i>
                         <span>Quản lý sách</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<?= BASE_URL ?>/index.php?page=borrow_admin" class="<?= ($page ?? '') == 'borrow_admin' ? 'active' : '' ?>">
                         <i class="bi bi-journal-plus"></i>
-                        <span>Phiếu mượn</span>
+                        <span>Mượn sách</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
+                    <a href="<?= BASE_URL ?>/index.php?page=return_admin" class="<?= ($page ?? '') == 'return_admin' ? 'active' : '' ?>">
                         <i class="bi bi-journal-check"></i>
-                        <span>Phiếu trả</span>
+                        <span>Trả sách</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="#">
-                        <i class="bi bi-cash-coin"></i>
-                        <span>Tiền phạt</span>
-                    </a>
-                </li>
-
-                <li>
-                    <a href="#">
+                    <a href="<?= BASE_URL ?>/index.php?page=notification_admin" class="<?= ($page ?? '') == 'notification_admin' ? 'active' : '' ?>">
                         <i class="bi bi-bell"></i>
                         <span>Thông báo</span>
                     </a>
